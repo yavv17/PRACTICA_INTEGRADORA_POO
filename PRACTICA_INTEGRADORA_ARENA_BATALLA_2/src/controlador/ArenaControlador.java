@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package controlador;
 
 import java.awt.event.ActionEvent; 
@@ -41,10 +36,9 @@ public class ArenaControlador implements ActionListener {
                 if (!ValidadorPersonaje.esIdValido(id) || !ValidadorPersonaje.esNombreValido(nombre)) { 
                     throw new IllegalArgumentException("Formato de ID (PER-000) o Nombre inválido."); 
                 } 
-                ValidadorPersonaje.validarEstadisticas(vida, 50, 50, 20); 
+                ValidadorPersonaje.validarEstadisticas(vista,vida, 50, 50, 20); 
  
-                PersonajeBase nuevo = crearInstanciaSegunClase(vista.getClaseSeleccionada(), id, 
-nombre, vida /*...*/); 
+                PersonajeBase nuevo = crearInstanciaSegunClase(vista.getClaseSelecionada(), id, nombre, vida); 
                 modelo.agregar(nuevo); 
  
                 vista.refrescarTabla(modelo.obtenerTodos()); 
@@ -59,10 +53,8 @@ JOptionPane.WARNING_MESSAGE);
         } 
     } 
  
-    private PersonajeBase crearInstanciaSegunClase(String clase, String id, String nombre, int vida 
-/*...*/) { 
-        // TODO: Implementar switch(clase) para instanciar cualquiera de las 10 subclases con 
-'rutaAvatarActual' 
+    private PersonajeBase crearInstanciaSegunClase(String clase, String id, String nombre, int vida) { 
+        // TODO: Implementar switch(clase) para instanciar cualquiera de las 10 subclases con 'rutaAvatarActual' 
         return null; 
     } 
 } 

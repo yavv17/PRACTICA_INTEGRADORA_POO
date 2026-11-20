@@ -25,5 +25,23 @@ public class Arquero extends PersonajeBase{
     public String getTipoClase() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public int getRango() {
+        return rango;
+    }
+
+    public void setRango(int rango) {
+        this.rango = rango;
+    }
+
+    public String getMunicion() {
+        return municion;
+    }
+
+    public void setMunicion(String municion) {
+        this.municion = municion;
+    }
+    
+    
     
 }

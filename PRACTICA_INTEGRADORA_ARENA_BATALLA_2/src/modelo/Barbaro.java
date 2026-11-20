@@ -31,6 +31,30 @@ public class Barbaro extends PersonajeBase{
     public String getTipoClase() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public int getEstamina() {
+        return estamina;
+    }
+
+    public void setEstamina(int estamina) {
+        this.estamina = estamina;
+    }
+
+    public int getResistencia() {
+        return resistencia;
+    }
+
+    public void setResistencia(int resistencia) {
+        this.resistencia = resistencia;
+    }
+
+    public String getArmaAdicional() {
+        return armaAdicional;
+    }
+
+    public void setArmaAdicional(String armaAdicional) {
+        this.armaAdicional = armaAdicional;
+    }
     
     
 }

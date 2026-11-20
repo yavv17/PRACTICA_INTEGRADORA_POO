@@ -30,5 +30,31 @@ public class Ninfa extends PersonajeBase {
     public String getTipoClase() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public String getElemento() {
+        return elemento;
+    }
+
+    public void setElemento(String elemento) {
+        this.elemento = elemento;
+    }
+
+    public int getNivelSeduccion() {
+        return nivelSeduccion;
+    }
+
+    public void setNivelSeduccion(int nivelSeduccion) {
+        this.nivelSeduccion = nivelSeduccion;
+    }
+
+    public int getExperiencia() {
+        return experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+    
+    
     
 }

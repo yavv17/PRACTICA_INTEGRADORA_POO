@@ -5,14 +5,17 @@
 
 package principal;
 
-/**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+import vista.ArenaBatallaVista;
+
 public class Main {
     
     public static void main(String[] args){
-        
+            java.awt.EventQueue.invokeLater(() -> {
+                ArenaBatallaVista vista = new ArenaBatallaVista();
+            vista.setLocationRelativeTo(null);
+            vista.setVisible(true);
+        });
+
     }
 
 }
