@@ -22,16 +22,13 @@ public class ArenaControlador implements ActionListener {
     public void actionPerformed(ActionEvent e) { 
         Object fuente = e.getSource();
         try { 
-            String id = vista.getTxtId().getText();
-            if(!ValidadorPersonaje.esIdValido(id)){
-                
-            }
             if (fuente == vista.getBtnSubirAvatar()) { 
                 String ruta = vista.abrirSelectorImagen(); 
                 if (ruta != null && ValidadorPersonaje.esImagenValida(ruta)) { 
                     this.rutaAvatarActual = ruta; 
                 }
-            } else if (fuente == vista.getBtnGuardar()) { 
+            } else if (fuente == vista.getBtnGuardar()) {
+                String id = vista.getTxtId().getText();
                 String nombre = vista.getTxtNombre().getText(); 
                 int vida = Integer.parseInt(vista.getTxtVida().getText()); 
                 // TODO: Extraer fuerza, poder, defensa, arma y atributos específicos de la subclase 
@@ -71,6 +68,12 @@ public class ArenaControlador implements ActionListener {
             } else if(fuente == vista.getBtnActualizar()){
                 
             }else if(fuente == vista.getBtnEliminar()){
+                String id = vista.getTxtId().getText();
+                
+                if (!ValidadorPersonaje.esIdValido(id)) { 
+                    throw new IllegalArgumentException("Formato de ID (PER-000)."); 
+                }
+                
                 boolean eliminado = modelo.eliminar(id);
                 if(eliminado){
                     JOptionPane.showMessageDialog(vista, "Combatiente eliminado exitosamente."); 
