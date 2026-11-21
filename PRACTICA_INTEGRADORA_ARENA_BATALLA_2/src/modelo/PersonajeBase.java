@@ -34,7 +34,7 @@ public abstract class PersonajeBase {
     } 
  
     public abstract String ejecutarHabilidadEspecial(PersonajeBase objetivo); 
-    public abstract String getTipoClase(); 
+    public abstract String getTipoClase();
     // TODO: Completar getters y setters encapsulados necesarios para la JTable, DAO y Controlador 
 
     public String getId() {

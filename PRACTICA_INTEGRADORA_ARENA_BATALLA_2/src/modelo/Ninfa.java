@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package modelo;
 
-/**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class Ninfa extends PersonajeBase {
     private String elemento;
     private int nivelSeduccion;
     private int experiencia;
 
-    public Ninfa(String elemento, int nivelSeduccion, int experiencia, String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+    public Ninfa(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,String elemento, int nivelSeduccion, int experiencia) {
         super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
         this.elemento = elemento;
         this.nivelSeduccion = nivelSeduccion;
@@ -23,12 +14,12 @@ public class Ninfa extends PersonajeBase {
    
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "H Ninfa";
     }
 
     @Override
     public String getTipoClase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Ninfa";
     }
 
     public String getElemento() {

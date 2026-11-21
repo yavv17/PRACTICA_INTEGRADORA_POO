@@ -1,19 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package modelo;
 
-/**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class Golem extends PersonajeBase {
     private int resistencia;
     private String elemento;
 
-    public Golem(int resistencia, String elemento, String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+    public Golem(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int resistencia, String elemento) {
         super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
         this.resistencia = resistencia;
         this.elemento = elemento;
@@ -22,12 +13,12 @@ public class Golem extends PersonajeBase {
     
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "H Golem";
     }
 
     @Override
     public String getTipoClase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Golem";
     }
 
     public int getResistencia() {

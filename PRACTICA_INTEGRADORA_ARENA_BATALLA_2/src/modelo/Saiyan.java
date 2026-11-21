@@ -1,21 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package modelo;
 
-/**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class Saiyan extends PersonajeBase {
     private boolean cola;
     private int celulasZ;
     private int zenkai;
     private int ki;
 
-    public Saiyan(boolean cola, int celulasZ, int zenkai, int ki, String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+    public Saiyan(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,boolean cola, int celulasZ, int zenkai, int ki) {
         super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
         this.cola = cola;
         this.celulasZ = celulasZ;
@@ -25,12 +16,12 @@ public class Saiyan extends PersonajeBase {
 
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "H Saiyan";
     }
 
     @Override
     public String getTipoClase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Saiyan";
     }
 
     public boolean isCola() {

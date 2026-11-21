@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package modelo;
 
 public class Stand extends PersonajeBase {
@@ -11,7 +6,7 @@ public class Stand extends PersonajeBase {
     private String frase;
     private String usuario;
 
-    public Stand(int rango, String tipo, String frase, String usuario, String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+    public Stand(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int rango, String tipo, String frase, String usuario) {
         super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
         this.rango = rango;
         this.tipo = tipo;
@@ -21,12 +16,12 @@ public class Stand extends PersonajeBase {
 
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "H Stand";
     }
 
     @Override
     public String getTipoClase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Stand";
     }
 
     public int getRango() {
@@ -60,8 +55,5 @@ public class Stand extends PersonajeBase {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
-    
-    
-    
+   
 }

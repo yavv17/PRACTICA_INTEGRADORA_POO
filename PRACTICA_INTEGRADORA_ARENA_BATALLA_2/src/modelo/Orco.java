@@ -1,21 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package modelo;
 
-/**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class Orco extends PersonajeBase {
     private int colmillos;
     private String tamano;
     private String color;
     private String aditamento;
 
-    public Orco(int colmillos, String tamano, String color, String aditamento, String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+    public Orco(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int colmillos, String tamano, String color, String aditamento) {
         super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
         this.colmillos = colmillos;
         this.tamano = tamano;
@@ -25,12 +16,12 @@ public class Orco extends PersonajeBase {
 
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "H Orco";
     }
 
     @Override
     public String getTipoClase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Orco";
     }
 
     public int getColmillos() {

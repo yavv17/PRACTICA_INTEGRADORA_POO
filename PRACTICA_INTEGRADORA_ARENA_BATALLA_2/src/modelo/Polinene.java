@@ -1,20 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package modelo;
 
-/**
- * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public class Polinene extends PersonajeBase {
     private int cantidadPolimonedas;
     private int inteligencia;
     private boolean tamear;
 
-    public Polinene(int cantidadPolimonedas, int inteligencia, boolean tamear, String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+    public Polinene(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int cantidadPolimonedas, int inteligencia, boolean tamear) {
         super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
         this.cantidadPolimonedas = cantidadPolimonedas;
         this.inteligencia = inteligencia;
@@ -25,12 +16,12 @@ public class Polinene extends PersonajeBase {
     
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "H Polinene";
     }
 
     @Override
     public String getTipoClase() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "Polinene";
     }
 
     public int getCantidadPolimonedas() {

@@ -5,17 +5,23 @@
 
 package principal;
 
+import controlador.ArenaControlador;
+import modelo.GestorArenaModelo;
 import vista.ArenaBatallaVista;
 
 public class Main {
-    
-    public static void main(String[] args){
-            java.awt.EventQueue.invokeLater(() -> {
-                ArenaBatallaVista vista = new ArenaBatallaVista();
+
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(() -> {
+
+            GestorArenaModelo modelo = new GestorArenaModelo();
+
+            ArenaBatallaVista vista = new ArenaBatallaVista();
+
+            ArenaControlador controlador = new ArenaControlador(modelo, vista);
+
             vista.setLocationRelativeTo(null);
             vista.setVisible(true);
         });
-
     }
-
 }
