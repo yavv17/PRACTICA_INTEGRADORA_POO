@@ -108,5 +108,12 @@ public abstract class PersonajeBase {
     public void setRutaImagen(String rutaImagen) {
         this.rutaImagen = rutaImagen;
     }
+
+    @Override
+    public String toString() {
+        return "PersonajeBase{" + "id=" + id + ", nombre=" + nombre + ", vida=" + vida + ", vidaMaxima=" + vidaMaxima + ", fuerza=" + fuerza + ", poder=" + poder + ", defensa=" + defensa + ", arma=" + arma + ", rutaImagen=" + rutaImagen + '}';
+    }
+    
+    
     
 } 

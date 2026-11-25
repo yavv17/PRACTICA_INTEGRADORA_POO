@@ -55,6 +55,11 @@ public class Saiyan extends PersonajeBase {
     public void setKi(int ki) {
         this.ki = ki;
     }
+
+    @Override
+    public String toString() {
+        return "Saiyan{" + "cola=" + cola + ", celulasZ=" + celulasZ + ", zenkai=" + zenkai + ", ki=" + ki + '}';
+    }
     
     
     

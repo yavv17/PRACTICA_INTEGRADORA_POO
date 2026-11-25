@@ -45,6 +45,12 @@ public class Ninfa extends PersonajeBase {
     public void setExperiencia(int experiencia) {
         this.experiencia = experiencia;
     }
+
+    @Override
+    public String toString() {
+        return "Ninfa{" + "elemento=" + elemento + ", nivelSeduccion=" + nivelSeduccion + ", experiencia=" + experiencia + '}';
+    }
+    
     
     
     

@@ -19,16 +19,24 @@ public class GestorArenaModelo {
         if(idSinUsar){
             roster.add(nuevo); 
         }else{
-            javax.swing.JOptionPane.showMessageDialog(panel,
-                    "El ID " + nuevo.getId() + " ya esta siendo utilizado",
-                    "ID repetido",
-                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            throw new IllegalArgumentException("Ya existe un combatiente con ID " + nuevo.getId()); 
         }
     } 
  
     public List<PersonajeBase> obtenerTodos() { 
         return new ArrayList<>(roster); 
-    } 
+    }
+    
+    public PersonajeBase buscarPorId(String id) {
+        for (int i = 0; i < roster.size(); i++) {
+            PersonajeBase personaje = roster.get(i);
+
+            if (personaje.getId().equalsIgnoreCase(id)) {
+                return personaje;
+            }
+        }
+        return null;
+    }
  
     public boolean actualizar(PersonajeBase actualizado) { 
         for (int i = 0; i < roster.size(); i++) { 

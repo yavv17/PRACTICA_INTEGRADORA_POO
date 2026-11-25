@@ -36,5 +36,10 @@ public class Golem extends PersonajeBase {
     public void setElemento(String elemento) {
         this.elemento = elemento;
     }
+
+    @Override
+    public String toString() {
+        return "Golem{" + "resistencia=" + resistencia + ", elemento=" + elemento + '}';
+    }
     
 }

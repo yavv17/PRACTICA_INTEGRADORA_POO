@@ -47,5 +47,11 @@ public class Polinene extends PersonajeBase {
     public void setTamear(boolean tamear) {
         this.tamear = tamear;
     }
+
+    @Override
+    public String toString() {
+        return "Polinene{" + "cantidadPolimonedas=" + cantidadPolimonedas + ", inteligencia=" + inteligencia + ", tamear=" + tamear + '}';
+    }
+    
     
 }

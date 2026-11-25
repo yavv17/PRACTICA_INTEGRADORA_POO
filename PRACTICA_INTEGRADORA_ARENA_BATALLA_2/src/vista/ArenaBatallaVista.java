@@ -178,13 +178,37 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     public JTextField getTxtHabilidadExtra4() {
         return TxtHabilidadExtra4;
     }
-    
 
-    public String getClaseSelecionada() {
-        return (String) ComboClaseSelecionada.getSelectedItem();
+    public JButton getBtnAtacarCombatiente1() {
+        return BtnAtacarCombatiente1;
     }
-    public void setClaseSelecionada(JComboBox<String> ClaseSelecionada) {
-        this.ComboClaseSelecionada = ClaseSelecionada;
+
+    public JButton getBtnAtacarCombatiente2() {
+        return BtnAtacarCombatiente2;
+    }
+
+    public JButton getBtnHabilidadCombatiente1() {
+        return BtnHabilidadCombatiente1;
+    }
+
+    public JButton getBtnHabilidadCombatiente2() {
+        return BtnHabilidadCombatiente2;
+    }
+
+    public JButton getBtnRegistrarBatallaBD() {
+        return BtnRegistrarBatallaBD;
+    }
+
+    public JButton getBtnReiniciarCombate() {
+        return BtnReiniciarCombate;
+    }
+
+    public JCheckBox getCheckBoxHabilidadBooleana() {
+        return CheckBoxHabilidadBooleana;
+    }
+
+    public JComboBox<String> getComboClaseSelecionada() {
+        return ComboClaseSelecionada;
     }
     
     public void actualizarElementosHabilidadExtra() {
@@ -199,6 +223,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         for(int i = 0; i < nMaxExtra; i++){
             camposExtra.get(i).setText("");
         }
+        CheckBoxHabilidadBooleana.setSelected(false);
         
         ClaseCombatiente clase = ClaseCombatiente.valueOf(
             claseSeleccionada.toUpperCase()
@@ -223,9 +248,32 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             labelsExtra.get(i).setVisible(false);
             camposExtra.get(i).setVisible(false);
         }
+        
+        if(clase.tieneAtributoBooleano()){
+            CheckBoxHabilidadBooleana.setVisible(true);
+            String [] atributosBooleanos = clase.getAtributosBooleanos();
+            CheckBoxHabilidadBooleana.setText(atributosBooleanos[0]);
+        }else{
+            CheckBoxHabilidadBooleana.setVisible(false);
+        }
 
         revalidate();
         repaint();
+    }
+    
+    public void limpiarRegistro(){
+        TxtId.setText("");
+        TxtNombre.setText("");
+        TxtVida.setText("");
+        TxtFuerza.setText("");
+        TxtPoder.setText("");
+        TxtDefensa.setText("");
+        TxtArma.setText("");
+        ComboClaseSelecionada.setSelectedIndex(0);
+        CheckBoxHabilidadBooleana.setSelected(false);
+        actualizarElementosHabilidadExtra();
+        lblImageAvatarCombatiente.setIcon(null);
+        lblImageAvatarCombatiente.setText("Sin imagen");
     }
 
     
@@ -276,6 +324,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         TxtHabilidadExtra2 = new javax.swing.JTextField();
         TxtHabilidadExtra3 = new javax.swing.JTextField();
         TxtHabilidadExtra4 = new javax.swing.JTextField();
+        CheckBoxHabilidadBooleana = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableRegistroCombatientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -460,11 +509,13 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             }
         });
 
+        CheckBoxHabilidadBooleana.setLabel("Habilidad Bool");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -512,10 +563,13 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                         .addGap(69, 69, 69))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BtnLimpiar)
                             .addComponent(BtnSubirAvatar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblImageAvatarCombatiente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(42, 42, 42))))
+                            .addComponent(lblImageAvatarCombatiente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnLimpiar))
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(CheckBoxHabilidadBooleana, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,7 +615,8 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRegistroHabilidadExtra1)
-                    .addComponent(TxtHabilidadExtra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtHabilidadExtra1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CheckBoxHabilidadBooleana))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRegistroHabilidadExtra2)
@@ -574,7 +629,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRegistroHabilidadExtra4)
                     .addComponent(TxtHabilidadExtra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnGuardar)
                     .addComponent(BtnActualizar)
@@ -650,7 +705,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         TabbedPaneArena.addTab("1. Forja de Personajes  (CRUD)", jPanel2);
@@ -974,7 +1029,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addComponent(lblBitacoraCombate)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         TabbedPaneArena.addTab("2. Carga de Combatientes (POD)", jPanel3);
@@ -1046,16 +1101,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtVidaActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
-        TxtId.setText("");
-        TxtNombre.setText("");
-        TxtVida.setText("");
-        TxtFuerza.setText("");
-        TxtPoder.setText("");
-        TxtDefensa.setText("");
-        ComboClaseSelecionada.setSelectedIndex(0);
-        actualizarElementosHabilidadExtra();
-        lblImageAvatarCombatiente.setIcon(null);
-        lblImageAvatarCombatiente.setText("Sin imagen");
+        limpiarRegistro();
         JOptionPane.showMessageDialog(this, "Registro limpiado correctamente.");
     }//GEN-LAST:event_BtnLimpiarActionPerformed
 
@@ -1100,6 +1146,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     private javax.swing.JButton BtnRegistrarBatallaBD;
     private javax.swing.JButton BtnReiniciarCombate;
     private javax.swing.JButton BtnSubirAvatar;
+    private javax.swing.JCheckBox CheckBoxHabilidadBooleana;
     private javax.swing.JComboBox<String> ComboClaseSelecionada;
     private javax.swing.JComboBox<String> ComboCombatiente1;
     private javax.swing.JComboBox<String> ComboCombatiente2;

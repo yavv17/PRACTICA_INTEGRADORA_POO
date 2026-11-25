@@ -1,6 +1,5 @@
 package modelo;
 
-
 public class Arquero extends PersonajeBase{
     private int rango;
     private String municion;
@@ -36,7 +35,10 @@ public class Arquero extends PersonajeBase{
     public void setMunicion(String municion) {
         this.municion = municion;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Arquero{" + "rango=" + rango + ", municion=" + municion + '}';
+    }    
     
 }

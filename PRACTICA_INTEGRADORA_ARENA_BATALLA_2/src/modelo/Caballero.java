@@ -55,6 +55,11 @@ public class Caballero extends PersonajeBase {
     public void setCriaturaApoyo(String criaturaApoyo) {
         this.criaturaApoyo = criaturaApoyo;
     }
+
+    @Override
+    public String toString() {
+        return "Caballero{" + "armadura=" + armadura + ", resistencia=" + resistencia + ", escudo=" + escudo + ", criaturaApoyo=" + criaturaApoyo + '}';
+    }
     
     
     

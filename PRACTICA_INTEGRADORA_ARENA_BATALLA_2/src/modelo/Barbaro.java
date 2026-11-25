@@ -46,6 +46,12 @@ public class Barbaro extends PersonajeBase{
     public void setArmaAdicional(String armaAdicional) {
         this.armaAdicional = armaAdicional;
     }
+
+    @Override
+    public String toString() {
+        return "Barbaro{" + "estamina=" + estamina + ", resistencia=" + resistencia + ", armaAdicional=" + armaAdicional + '}';
+    }
+    
     
     
 }

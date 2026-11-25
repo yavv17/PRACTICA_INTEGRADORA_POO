@@ -55,6 +55,11 @@ public class Orco extends PersonajeBase {
     public void setAditamento(String aditamento) {
         this.aditamento = aditamento;
     }
+
+    @Override
+    public String toString() {
+        return "Orco{" + "colmillos=" + colmillos + ", tamano=" + tamano + ", color=" + color + ", aditamento=" + aditamento + '}';
+    }
     
     
     

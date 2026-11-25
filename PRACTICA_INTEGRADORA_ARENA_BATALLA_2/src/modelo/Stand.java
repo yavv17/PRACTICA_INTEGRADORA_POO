@@ -55,5 +55,10 @@ public class Stand extends PersonajeBase {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "Stand{" + "rango=" + rango + ", tipo=" + tipo + ", frase=" + frase + ", usuario=" + usuario + '}';
+    }
    
 }

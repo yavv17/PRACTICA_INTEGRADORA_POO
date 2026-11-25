@@ -25,6 +25,11 @@ public class Bardo extends PersonajeBase {
     public void setInspiracion(int inspiracion) {
         this.inspiracion = inspiracion;
     }
+
+    @Override
+    public String toString() {
+        return "Bardo{" + "inspiracion=" + inspiracion + '}';
+    }
     
     
 }

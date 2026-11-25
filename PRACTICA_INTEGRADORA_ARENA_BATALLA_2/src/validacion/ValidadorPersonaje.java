@@ -31,7 +31,9 @@ public class ValidadorPersonaje {
         return ruta != null && PATRON_IMAGEN.matcher(ruta.trim()).matches(); 
     } 
  
-    public static void validarEstadisticas(JFrame panel,int vida, int fuerza, int poder, int defensa) { 
+    public static void validarEstadisticas(JFrame panel,String clase,int vida, int fuerza, int poder, int defensa,
+           String arma, String habilidadExtra1, String habilidadExtra2, String habilidadExtra3,
+           String habilidadExtra4) { 
         // TODO: Validar rangos (vida: 50-1000, fuerza/poder: 10-250, defensa: 0-150). 
         // Si algún valor está fuera de rango, lanzar IllegalArgumentException con un mensaje claro. 
         try{
