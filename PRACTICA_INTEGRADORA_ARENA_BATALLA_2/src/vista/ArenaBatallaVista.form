@@ -51,10 +51,10 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -107,7 +107,7 @@
                               <Component id="jPanel4" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" pref="566" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="32" max="32767" attributes="0"/>
+                          <EmptySpace pref="47" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -186,7 +186,7 @@
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="BtnGuardar" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="65" max="32767" attributes="0"/>
+                                          <EmptySpace pref="64" max="32767" attributes="0"/>
                                           <Component id="BtnActualizar" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                                           <Component id="BtnEliminar" min="-2" max="-2" attributes="0"/>
@@ -211,7 +211,7 @@
                                               <Component id="TxtId" alignment="0" max="32767" attributes="0"/>
                                               <Component id="TxtVida" alignment="0" max="32767" attributes="0"/>
                                               <Component id="TxtDefensa" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="comboClaseSelecionada" pref="220" max="32767" attributes="0"/>
+                                              <Component id="ClaseSelecionada" pref="220" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -281,7 +281,7 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="lblRegistroClaseCombatiente" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="comboClaseSelecionada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="ClaseSelecionada" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="BtnSubirAvatar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -382,7 +382,7 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="TxtArma">
                         </Component>
-                        <Component class="javax.swing.JComboBox" name="comboClaseSelecionada">
+                        <Component class="javax.swing.JComboBox" name="ClaseSelecionada">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
@@ -394,7 +394,7 @@
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboClaseSelecionadaActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClaseSelecionadaActionPerformed"/>
                           </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="ArenaBatallaVista_ClaseSelecionada"/>
@@ -647,7 +647,7 @@
                                               <Component id="jPanel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel14" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="214" max="32767" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel15" min="-2" pref="62" max="-2" attributes="0"/>
                                               <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
@@ -687,7 +687,7 @@
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="21" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -715,7 +715,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="comboCombatiente1" pref="637" max="32767" attributes="0"/>
+                              <Component id="jComboBox1" pref="637" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -724,14 +724,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="comboCombatiente1" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jComboBox1" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JComboBox" name="comboCombatiente1">
+                    <Component class="javax.swing.JComboBox" name="jComboBox1">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
@@ -743,7 +743,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCombatiente1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -765,7 +765,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="comboCombatiente2" pref="636" max="32767" attributes="0"/>
+                              <Component id="jComboBox2" pref="636" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -774,14 +774,14 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="comboCombatiente2" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jComboBox2" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JComboBox" name="comboCombatiente2">
+                    <Component class="javax.swing.JComboBox" name="jComboBox2">
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
@@ -793,7 +793,7 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboCombatiente2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

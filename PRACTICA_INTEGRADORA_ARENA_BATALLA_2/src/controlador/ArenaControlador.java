@@ -3,7 +3,6 @@ package controlador;
 import java.awt.event.ActionEvent; 
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane; 
-import javax.swing.JComboBox;
 import modelo.*; 
 import validacion.ValidadorPersonaje; 
 import vista.ArenaBatallaVista; 
@@ -20,15 +19,15 @@ public class ArenaControlador implements ActionListener {
     } 
  
     @Override 
-    public void actionPerformed(ActionEvent evento) { 
-        Object componentePresionado = evento.getSource();
+    public void actionPerformed(ActionEvent e) { 
+        Object fuente = e.getSource();
         try { 
-            if (componentePresionado == vista.getBtnSubirAvatar()) { 
-                String rutaImagenSeleccionada = vista.abrirSelectorImagen(); 
-                if (rutaImagenSeleccionada != null && ValidadorPersonaje.esImagenValida(rutaImagenSeleccionada)) { 
-                    this.rutaAvatarActual = rutaImagenSeleccionada; 
+            if (fuente == vista.getBtnSubirAvatar()) { 
+                String ruta = vista.abrirSelectorImagen(); 
+                if (ruta != null && ValidadorPersonaje.esImagenValida(ruta)) { 
+                    this.rutaAvatarActual = ruta; 
                 }
-            } else if (componentePresionado == vista.getBtnGuardar()) {
+            } else if (fuente == vista.getBtnGuardar()) {
                 String id = vista.getTxtId().getText();
                 String nombre = vista.getTxtNombre().getText(); 
                 int vida = Integer.parseInt(vista.getTxtVida().getText()); 
@@ -37,92 +36,46 @@ public class ArenaControlador implements ActionListener {
                 int poder = Integer.parseInt(vista.getTxtPoder().getText());
                 int defensa = Integer.parseInt(vista.getTxtDefensa().getText());
                 String arma = vista.getTxtArma().getText();
-                String atributoEspecial1 = "Vacio";
-                String atributoEspecial2 = "Vacio";
-                String atributoEspecial3 = "Vacio";
-                String atributoEspecial4 = "Vacio";
+                String habilidadExtra1 = "Vacio";
+                String habilidadExtra2 = "Vacio";
+                String habilidadExtra3 = "Vacio";
+                String habilidadExtra4 = "Vacio";
                 if(vista.getTxtHabilidadExtra1().isVisible()){
-                    atributoEspecial1 = vista.getTxtHabilidadExtra1().getText();
+                    habilidadExtra1 = vista.getTxtHabilidadExtra1().getText();
                 }
                 if(vista.getTxtHabilidadExtra2().isVisible()){
-                    atributoEspecial2 = vista.getTxtHabilidadExtra2().getText();
+                    habilidadExtra2 = vista.getTxtHabilidadExtra2().getText();
                 }
                 if(vista.getTxtHabilidadExtra3().isVisible()){
-                    atributoEspecial3 = vista.getTxtHabilidadExtra3().getText();
+                    habilidadExtra3 = vista.getTxtHabilidadExtra3().getText();
                 }
                 if(vista.getTxtHabilidadExtra4().isVisible()){
-                    atributoEspecial4 = vista.getTxtHabilidadExtra4().getText();
+                    habilidadExtra4 = vista.getTxtHabilidadExtra4().getText();
                 }
                 
                 if (!ValidadorPersonaje.esIdValido(id) || !ValidadorPersonaje.esNombreValido(nombre)) { 
                     throw new IllegalArgumentException("Formato de ID (PER-000) o Nombre inválido."); 
                 } 
-                ValidadorPersonaje.validarEstadisticas(vista,vida, fuerza, poder, defensa); 
+                ValidadorPersonaje.validarEstadisticas(vista,vida, 50, 50, 20); 
  
-                PersonajeBase nuevoPersonaje = crearInstanciaSegunClase(vista.getClaseSelecionada(), id, nombre, vida,
-                        fuerza,poder,defensa,arma,this.rutaAvatarActual,atributoEspecial1,atributoEspecial2,
-                        atributoEspecial3,atributoEspecial4); 
-                modelo.agregar(vista,nuevoPersonaje); 
+                PersonajeBase nuevo = crearInstanciaSegunClase(vista.getClaseSelecionada(), id, nombre, vida,
+                        fuerza,poder,defensa,arma,this.rutaAvatarActual,habilidadExtra1,habilidadExtra2,
+                        habilidadExtra3,habilidadExtra4); 
+                modelo.agregar(vista,nuevo); 
+ 
                 vista.refrescarTabla(modelo.obtenerTodos()); 
-                vista.actualizarCombosCombatientes(modelo.obtenerTodos());
                 JOptionPane.showMessageDialog(vista, "Combatiente registrado exitosamente."); 
-            } else if (componentePresionado == vista.getBtnActualizar()) {
-                String id = vista.getTxtId().getText();
-                 String nombre = vista.getTxtNombre().getText();
-                    int vida = Integer.parseInt(vista.getTxtVida().getText());
-                    int fuerza = Integer.parseInt(vista.getTxtFuerza().getText());
-                    int poder = Integer.parseInt(vista.getTxtPoder().getText());
-                    int defensa = Integer.parseInt(vista.getTxtDefensa().getText());
-                    String arma = vista.getTxtArma().getText();
-
-                    String atributoEspecial1 = vista.getTxtHabilidadExtra1().isVisible()
-                            ? vista.getTxtHabilidadExtra1().getText() : "Vacio";
-                    String atributoEspecial2 = vista.getTxtHabilidadExtra2().isVisible()
-                            ? vista.getTxtHabilidadExtra2().getText() : "Vacio";
-                    String atributoEspecial3 = vista.getTxtHabilidadExtra3().isVisible()
-                            ? vista.getTxtHabilidadExtra3().getText() : "Vacio";
-                    String atributoEspecial4 = vista.getTxtHabilidadExtra4().isVisible()
-                            ? vista.getTxtHabilidadExtra4().getText() : "Vacio";
-
-                    if (!ValidadorPersonaje.esIdValido(id) || !ValidadorPersonaje.esNombreValido(nombre)) {
-                        throw new IllegalArgumentException("Formato de ID (PER-000) o Nombre inválido.");
-                    }
-                    ValidadorPersonaje.validarEstadisticas(vista, vida, fuerza, poder, defensa);
+            } else if(fuente == vista.getBtnActualizar()){
                 
-                    PersonajeBase existente = modelo.buscarPorId(id);
-                    if (existente == null) {
-                        JOptionPane.showMessageDialog(vista,
-                                "Error: No se encontró un combatiente con ID " + id + ".",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
-                        return;
-                    }
-
-                String rutaAvatar = this.rutaAvatarActual.isEmpty()
-                        ? existente.getRutaImagen()
-                        : this.rutaAvatarActual;
-            
-                PersonajeBase actualizado = crearInstanciaSegunClase(
-                        vista.getClaseSelecionada(), id, nombre, vida, fuerza, poder, defensa,
-                        arma, rutaAvatar, atributoEspecial1, atributoEspecial2,
-                        atributoEspecial3, atributoEspecial4);
-            
-                if (modelo.actualizar(actualizado)) {
-                    vista.refrescarTabla(modelo.obtenerTodos());
-                    vista.actualizarCombosCombatientes(modelo.obtenerTodos());
-                    JOptionPane.showMessageDialog(vista, "Combatiente actualizado exitosamente.");
-                }
-            
-            }  
-            else if(componentePresionado == vista.getBtnEliminar()){
+            }else if(fuente == vista.getBtnEliminar()){
                 String id = vista.getTxtId().getText();
                 
                 if (!ValidadorPersonaje.esIdValido(id)) { 
                     throw new IllegalArgumentException("Formato de ID (PER-000)."); 
                 }
                 
-                boolean personajeEliminado = modelo.eliminar(id);
-                if(personajeEliminado){
+                boolean eliminado = modelo.eliminar(id);
+                if(eliminado){
                     JOptionPane.showMessageDialog(vista, "Combatiente eliminado exitosamente."); 
                 }else{
                     JOptionPane.showMessageDialog(vista, 
@@ -145,119 +98,63 @@ public class ArenaControlador implements ActionListener {
         } 
     } 
  
-    private PersonajeBase crearInstanciaSegunClase(String tipoPersonaje, String id, String nombre, int vida,
-            int fuerza, int poder, int defensa, String arma,String rutaImagen, String atributoEspecial1,
-            String atributoEspecial2,String atributoEspecial3,String atributoEspecial4) { 
+    private PersonajeBase crearInstanciaSegunClase(String clase, String id, String nombre, int vida,
+            int fuerza, int poder, int defensa, String arma,String rutaImagen, String habilidadExtra1,
+            String habilidadExtra2,String habilidadExtra3,String habilidadExtra4) { 
         // TODO: Implementar switch(clase) para instanciar cualquiera de las 10 subclases con 'rutaAvatarActual'
-        switch(tipoPersonaje){
-            case "Arquero":
-                int rango = Integer.parseInt(atributoEspecial1);
-                String municion = atributoEspecial2;
-                ValidadorPersonaje.validarArquero(rango, municion);
-                return new Arquero(id, nombre, vida, fuerza, poder, defensa,
-                        arma, rutaImagen, rango, municion);
-            case "Barbaro":
-               int estamina = Integer.parseInt(atributoEspecial1);
-               int resistenciaBarbaro = Integer.parseInt(atributoEspecial2);
-               String armaAdicional = atributoEspecial3;
-               ValidadorPersonaje.validarBarbaro(
-               estamina, resistenciaBarbaro, armaAdicional);
-                return new Barbaro(id, nombre, vida, fuerza, poder, defensa,
-                         arma, rutaImagen, estamina, resistenciaBarbaro, armaAdicional);
-           case "Bardo":
-               int inspiracion = Integer.parseInt(atributoEspecial1);
-               ValidadorPersonaje.validarBardo(inspiracion);
-                return new Bardo(id, nombre, vida, fuerza, poder, defensa,
-                         arma, rutaImagen, inspiracion);
+        switch(clase){
+            case "Arquero": 
+                return new Arquero(id,nombre,vida,fuerza,poder,defensa,arma,rutaImagen,
+                        Integer.parseInt(habilidadExtra1),habilidadExtra2);
+            case "Barbaro": 
+                return new Barbaro(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen,
+                        Integer.parseInt(habilidadExtra1), 
+                        Integer.parseInt(habilidadExtra2), 
+                        habilidadExtra3);
+            case "Bardo":
+                return new Bardo(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        Integer.parseInt(habilidadExtra1));
             case "Caballero":
-                int armadura = Integer.parseInt(atributoEspecial1);
-                int resistencia = Integer.parseInt(atributoEspecial2);
-                boolean escudo = ValidadorPersonaje.convertirBooleano(atributoEspecial3, "Escudo");
-                ValidadorPersonaje.validarCaballero(armadura, resistencia, escudo, atributoEspecial4);
-                return new Caballero(id, nombre, vida, fuerza, poder, defensa,
-                           arma, rutaImagen, armadura, resistencia, escudo, atributoEspecial4);
+                return new Caballero(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        Integer.parseInt(habilidadExtra1),
+                        Integer.parseInt(habilidadExtra2), 
+                        true, //Corregir
+                        habilidadExtra4);
             case "Golem":
-                int resistenciaGolem = Integer.parseInt(atributoEspecial1);
-                String elementoGolem = atributoEspecial2;
-                ValidadorPersonaje.validarGolem(
-                resistenciaGolem, elementoGolem);
-                return new Golem(id, nombre, vida, fuerza, poder, defensa,
-                           arma, rutaImagen, resistenciaGolem, elementoGolem);
+                return new Golem(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        Integer.parseInt(habilidadExtra1), 
+                        habilidadExtra2);
             case "Ninfa":
-               String elementoNinfa = atributoEspecial1;
-               int nivelSeduccion = Integer.parseInt(atributoEspecial2);
-               int experiencia = Integer.parseInt(atributoEspecial3);
-               ValidadorPersonaje.validarNinfa(
-               elementoNinfa, nivelSeduccion, experiencia);
-                return new Ninfa(id, nombre, vida, fuerza, poder, defensa,
-                           arma, rutaImagen, elementoNinfa, nivelSeduccion, experiencia);
+                return new Ninfa(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        habilidadExtra1, 
+                        Integer.parseInt(habilidadExtra2), 
+                        Integer.parseInt(habilidadExtra3));
             case "Orco":
-               int colmillos = Integer.parseInt(atributoEspecial1);
-               String tamano = atributoEspecial2;
-               String color = atributoEspecial3;
-               String aditamento = atributoEspecial4;
-               ValidadorPersonaje.validarOrco(
-               colmillos, tamano, color, aditamento);
-                return new Orco(id, nombre, vida, fuerza, poder, defensa,
-                          arma, rutaImagen, colmillos, tamano, color, aditamento);
-           case "Polinene":
-                int cantidadPolimonedas = Integer.parseInt(atributoEspecial1);
-                int inteligencia = Integer.parseInt(atributoEspecial2);
-                boolean tamear = ValidadorPersonaje.convertirBooleano(atributoEspecial3, "Tamear");
-                ValidadorPersonaje.validarPolinene(
-                cantidadPolimonedas, inteligencia, tamear);
-                 return new Polinene(id, nombre, vida, fuerza, poder, defensa,
-                            arma, rutaImagen, cantidadPolimonedas, inteligencia, tamear);
+                return new Orco(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        Integer.parseInt(habilidadExtra1), 
+                        habilidadExtra2, 
+                        habilidadExtra3, 
+                        habilidadExtra4);
+            case "Polinene":
+                return new Polinene(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        Integer.parseInt(habilidadExtra1), 
+                        Integer.parseInt(habilidadExtra2),
+                        true); //Corregir
             case "Saiyan":
-                boolean cola = ValidadorPersonaje.convertirBooleano(atributoEspecial1, "Cola");
-                int celulasZ = Integer.parseInt(atributoEspecial2);
-                int zenkai = Integer.parseInt(atributoEspecial3);
-                int ki = Integer.parseInt(atributoEspecial4);
-                ValidadorPersonaje.validarSaiyan(
-                cola, celulasZ, zenkai, ki);
-                 return new Saiyan(id, nombre, vida, fuerza, poder, defensa,
-                            arma, rutaImagen, cola, celulasZ, zenkai, ki);
+                return new Saiyan(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        true, //Corregir
+                        Integer.parseInt(habilidadExtra2), 
+                        Integer.parseInt(habilidadExtra3), 
+                        Integer.parseInt(habilidadExtra4));
             case "Stand":
-                int rangoStand = Integer.parseInt(atributoEspecial1);
-                String tipo = atributoEspecial2;
-                String frase = atributoEspecial3;
-                String usuario = atributoEspecial4;
-                ValidadorPersonaje.validarStand(
-                rangoStand, tipo, frase, usuario);
-                  return new Stand(id, nombre, vida, fuerza, poder, defensa,
-                             arma, rutaImagen, rangoStand, tipo, frase, usuario);
+                return new Stand(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen, 
+                        Integer.parseInt(habilidadExtra1), 
+                        habilidadExtra2, 
+                        habilidadExtra3, 
+                        habilidadExtra4);
             default:
-                 throw new IllegalArgumentException("Clase de combatiente no válida: " + tipoPersonaje);
+                break;
         }
+        return null; 
     } 
-    private PersonajeBase obtenerCombatienteDesdeCombo(JComboBox<String> combo) {
-    String seleccion = (String) combo.getSelectedItem();
-
-    if (seleccion == null || seleccion.startsWith("Selecciona")) {
-        throw new IllegalArgumentException("Selecciona los dos combatientes.");
-    }
-
-    String id = seleccion.split(" - ", 2)[0];
-    PersonajeBase personaje = modelo.buscarPorId(id);
-
-    if (personaje == null) {
-        throw new IllegalArgumentException("No se encontró el combatiente seleccionado.");
-    }
-
-    return personaje;
-  }
-
-   private void validarTurnoCombate(PersonajeBase atacante, PersonajeBase objetivo) {
-    if (atacante.getId().equals(objetivo.getId())) {
-        throw new IllegalArgumentException("Selecciona dos combatientes diferentes.");
-    }
-
-    if (atacante.getVida() <= 0) {
-        throw new IllegalArgumentException("El atacante ya fue derrotado.");
-    }
-
-    if (objetivo.getVida() <= 0) {
-        throw new IllegalArgumentException("El objetivo ya fue derrotado.");
-    }
-  }
 } 
