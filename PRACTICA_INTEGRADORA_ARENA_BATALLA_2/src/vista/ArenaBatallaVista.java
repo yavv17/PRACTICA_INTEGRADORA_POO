@@ -15,6 +15,7 @@ import modelo.PersonajeBase;
 
 public final class ArenaBatallaVista extends javax.swing.JFrame {
     
+    public static final String RUTA_IMAGEN_VERSUS =  "resources/imagenes/Image_Versus.png";
     private DefaultTableModel modeloTabla; 
     private List<JLabel> labelsExtra = new ArrayList<>();
     private List<JTextField> camposExtra = new ArrayList<>();
@@ -90,6 +91,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         llenarComboClases();
         actualizarElementosHabilidadExtra();
         modeloTabla = (DefaultTableModel) TableRegistroCombatientes.getModel();
+        mostrarAvatarEnLabel(lblImageVersus,RUTA_IMAGEN_VERSUS);
     }
     
     
@@ -107,9 +109,9 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     }
     
     public void llenarComboClases(){
-        ClaseSelecionada.removeAllItems();
+        ComboClaseSelecionada.removeAllItems();
         for (ClaseCombatiente clase : ClaseCombatiente.values()) {
-             ClaseSelecionada.addItem(clase.getNombre());
+             ComboClaseSelecionada.addItem(clase.getNombre());
         }
     }
 
@@ -179,18 +181,18 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     
 
     public String getClaseSelecionada() {
-        return (String) ClaseSelecionada.getSelectedItem();
+        return (String) ComboClaseSelecionada.getSelectedItem();
     }
     public void setClaseSelecionada(JComboBox<String> ClaseSelecionada) {
-        this.ClaseSelecionada = ClaseSelecionada;
+        this.ComboClaseSelecionada = ClaseSelecionada;
     }
     
     public void actualizarElementosHabilidadExtra() {
-        if (ClaseSelecionada.getSelectedItem() == null) {
+        if (ComboClaseSelecionada.getSelectedItem() == null) {
             return;
         }
 
-        String claseSeleccionada = ClaseSelecionada.getSelectedItem().toString();
+        String claseSeleccionada = ComboClaseSelecionada.getSelectedItem().toString();
         int nHabExtra;
         int nMaxExtra = 4;
         
@@ -238,10 +240,10 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabbedPaneArena = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblRegistroCombatientes = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         lblRegistroIdCombatiente = new javax.swing.JLabel();
         lblRegistroNombreCombatiente = new javax.swing.JLabel();
@@ -256,7 +258,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         TxtPoder = new javax.swing.JTextField();
         TxtDefensa = new javax.swing.JTextField();
         TxtArma = new javax.swing.JTextField();
-        ClaseSelecionada = new javax.swing.JComboBox<>();
+        ComboClaseSelecionada = new javax.swing.JComboBox<>();
         lblAvatarCombatiente = new javax.swing.JLabel();
         BtnSubirAvatar = new javax.swing.JButton();
         BtnGuardar = new javax.swing.JButton();
@@ -277,33 +279,49 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableRegistroCombatientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        lblCombatiente1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboCombatiente1 = new javax.swing.JComboBox<>();
         jPanel7 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel13 = new javax.swing.JLabel();
+        ComboCombatiente2 = new javax.swing.JComboBox<>();
+        lblCombatiente2 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        lblImageCombatiente1 = new javax.swing.JLabel();
+        BtnAtacarCombatiente1 = new javax.swing.JButton();
+        BtnHabilidadCombatiente1 = new javax.swing.JButton();
+        ProgressBarVidaCombatiente1 = new javax.swing.JProgressBar();
+        lblVidaCombatiente1 = new javax.swing.JLabel();
+        lblAtributosPersonajeBaseCombatiente1 = new javax.swing.JLabel();
+        lblAtributosClaseCombatiente1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lblImageCombatiente2 = new javax.swing.JLabel();
+        BtnAtacarCombatiente2 = new javax.swing.JButton();
+        BtnHabilidadCombatiente2 = new javax.swing.JButton();
+        ProgressBarVidaCombatiente2 = new javax.swing.JProgressBar();
+        lblVidaCombatiente2 = new javax.swing.JLabel();
+        lblAtributosPersonajeBaseCombatiente2 = new javax.swing.JLabel();
+        lblAtributosClaseCombatiente2 = new javax.swing.JLabel();
+        lblCombate1 = new javax.swing.JLabel();
+        lblCombate2 = new javax.swing.JLabel();
+        lblBitacoraCombate = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnReiniciarCombate = new javax.swing.JButton();
+        BtnRegistrarBatallaBD = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TextAreaBitacora = new javax.swing.JTextArea();
+        lblImageVersus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Arena de Batalla POO - UPIICSA");
 
-        jTabbedPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TabbedPaneArena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Registro de combatientes");
+        lblRegistroCombatientes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblRegistroCombatientes.setText("Registro de combatientes");
 
         lblRegistroIdCombatiente.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblRegistroIdCombatiente.setText("ID de Personaje (PER-000)");
@@ -341,10 +359,10 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             }
         });
 
-        ClaseSelecionada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        ClaseSelecionada.addActionListener(new java.awt.event.ActionListener() {
+        ComboClaseSelecionada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboClaseSelecionada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ClaseSelecionadaActionPerformed(evt);
+                ComboClaseSelecionadaActionPerformed(evt);
             }
         });
 
@@ -486,7 +504,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                             .addComponent(TxtId, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TxtVida, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TxtDefensa, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ClaseSelecionada, 0, 220, Short.MAX_VALUE))))
+                            .addComponent(ComboClaseSelecionada, 0, 220, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -538,7 +556,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRegistroClaseCombatiente)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ClaseSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ComboClaseSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BtnSubirAvatar)))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -556,7 +574,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRegistroHabilidadExtra4)
                     .addComponent(TxtHabilidadExtra4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnGuardar)
                     .addComponent(BtnActualizar)
@@ -576,14 +594,14 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblRegistroCombatientes, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(lblRegistroCombatientes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -630,22 +648,22 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("1. Forja de Personajes  (CRUD)", jPanel2);
+        TabbedPaneArena.addTab("1. Forja de Personajes  (CRUD)", jPanel2);
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel12.setText("Combatiente 1");
+        lblCombatiente1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCombatiente1.setText("Combatiente 1");
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ComboCombatiente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboCombatiente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ComboCombatiente1ActionPerformed(evt);
             }
         });
 
@@ -655,23 +673,23 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, 637, Short.MAX_VALUE)
+                .addComponent(ComboCombatiente1, 0, 637, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        ComboCombatiente2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboCombatiente2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                ComboCombatiente2ActionPerformed(evt);
             }
         });
 
@@ -681,85 +699,199 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox2, 0, 636, Short.MAX_VALUE)
+                .addComponent(ComboCombatiente2, 0, 636, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ComboCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel13.setText("Combatiente 2");
+        lblCombatiente2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblCombatiente2.setText("Combatiente 2");
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblImageCombatiente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageCombatiente1.setText("Sin imagen");
+
+        BtnAtacarCombatiente1.setBackground(new java.awt.Color(201, 6, 2));
+        BtnAtacarCombatiente1.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAtacarCombatiente1.setText("Atacar");
+
+        BtnHabilidadCombatiente1.setBackground(new java.awt.Color(18, 77, 181));
+        BtnHabilidadCombatiente1.setForeground(new java.awt.Color(255, 255, 255));
+        BtnHabilidadCombatiente1.setText("Habilidad");
+
+        lblVidaCombatiente1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblVidaCombatiente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVidaCombatiente1.setText("HP: 000/000");
+
+        lblAtributosPersonajeBaseCombatiente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtributosPersonajeBaseCombatiente1.setText("Fuerza: 80 | Poder: 50 | Defensa: 30");
+
+        lblAtributosClaseCombatiente1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtributosClaseCombatiente1.setText("KI: 100");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(BtnAtacarCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(BtnHabilidadCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblImageCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ProgressBarVidaCombatiente1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                            .addComponent(lblVidaCombatiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAtributosPersonajeBaseCombatiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAtributosClaseCombatiente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(lblImageCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lblVidaCombatiente1)
+                        .addGap(15, 15, 15)
+                        .addComponent(ProgressBarVidaCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAtributosPersonajeBaseCombatiente1)
+                        .addGap(4, 4, 4)
+                        .addComponent(lblAtributosClaseCombatiente1)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAtacarCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnHabilidadCombatiente1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblImageCombatiente2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImageCombatiente2.setText("Sin imagen");
+
+        BtnAtacarCombatiente2.setBackground(new java.awt.Color(201, 6, 2));
+        BtnAtacarCombatiente2.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAtacarCombatiente2.setText("Atacar");
+        BtnAtacarCombatiente2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(201, 6, 2), 1, true));
+
+        BtnHabilidadCombatiente2.setBackground(new java.awt.Color(18, 77, 181));
+        BtnHabilidadCombatiente2.setForeground(new java.awt.Color(255, 255, 255));
+        BtnHabilidadCombatiente2.setText("Habilidad");
+
+        lblVidaCombatiente2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblVidaCombatiente2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVidaCombatiente2.setText("HP: 000/000");
+
+        lblAtributosPersonajeBaseCombatiente2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtributosPersonajeBaseCombatiente2.setText("Fuerza: 80 | Poder: 50 | Defensa: 30");
+        lblAtributosPersonajeBaseCombatiente2.setToolTipText("");
+
+        lblAtributosClaseCombatiente2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAtributosClaseCombatiente2.setText("KI: 100");
+        lblAtributosClaseCombatiente2.setToolTipText("");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 560, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(lblImageCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ProgressBarVidaCombatiente2, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                            .addComponent(lblVidaCombatiente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAtributosPersonajeBaseCombatiente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAtributosClaseCombatiente2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(BtnAtacarCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(BtnHabilidadCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(lblImageCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lblVidaCombatiente2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ProgressBarVidaCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAtributosPersonajeBaseCombatiente2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAtributosClaseCombatiente2)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAtacarCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnHabilidadCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel14.setText("Combate");
+        lblCombate1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCombate1.setText("Combate");
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel15.setText("Combate");
+        lblCombate2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCombate2.setText("Combate");
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel16.setText("Bitacora del Combate (Registro en Tiempo Real)");
+        lblBitacoraCombate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblBitacoraCombate.setText("Bitacora del Combate (Registro en Tiempo Real)");
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton1.setText("Reiniciar Combate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnReiniciarCombate.setText("Reiniciar Combate");
+        BtnReiniciarCombate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnReiniciarCombateActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Registrar Batalla en BD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnRegistrarBatallaBD.setBackground(new java.awt.Color(5, 156, 8));
+        BtnRegistrarBatallaBD.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegistrarBatallaBD.setText("Registrar Batalla en BD");
+        BtnRegistrarBatallaBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnRegistrarBatallaBDActionPerformed(evt);
             }
         });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        TextAreaBitacora.setEditable(false);
+        TextAreaBitacora.setColumns(20);
+        TextAreaBitacora.setRows(5);
+        jScrollPane2.setViewportView(TextAreaBitacora);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(449, 449, 449)
-                .addComponent(jButton1)
-                .addGap(64, 64, 64)
-                .addComponent(jButton2)
+                .addGap(483, 483, 483)
+                .addComponent(BtnReiniciarCombate)
+                .addGap(126, 126, 126)
+                .addComponent(BtnRegistrarBatallaBD)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
@@ -773,10 +905,12 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(BtnReiniciarCombate)
+                    .addComponent(BtnRegistrarBatallaBD))
                 .addGap(16, 16, 16))
         );
+
+        lblImageVersus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -786,7 +920,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblBitacoraCombate, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -794,19 +928,26 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblCombatiente1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(lblCombate1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(13, 13, 13)
+                                        .addComponent(lblImageVersus, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                        .addComponent(lblCombate2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(530, 530, 530)))))
                         .addGap(27, 27, 27))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -814,28 +955,29 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(lblCombatiente2)
+                    .addComponent(lblCombatiente1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15))
+                    .addComponent(lblCombate1)
+                    .addComponent(lblCombate2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblImageVersus, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBitacoraCombate)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("2. Carga de Combatientes (POD)", jPanel3);
+        TabbedPaneArena.addTab("2. Carga de Combatientes (POD)", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -843,14 +985,14 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jTabbedPane1)
+                .addComponent(TabbedPaneArena)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TabbedPaneArena)
                 .addGap(18, 18, 18))
         );
 
@@ -871,21 +1013,21 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void ComboCombatiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCombatiente2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_ComboCombatiente2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnReiniciarCombateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReiniciarCombateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnReiniciarCombateActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnRegistrarBatallaBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarBatallaBDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnRegistrarBatallaBDActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ComboCombatiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboCombatiente1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ComboCombatiente1ActionPerformed
 
     private void TxtHabilidadExtra4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtHabilidadExtra4ActionPerformed
         // TODO add your handling code here:
@@ -910,7 +1052,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         TxtFuerza.setText("");
         TxtPoder.setText("");
         TxtDefensa.setText("");
-        ClaseSelecionada.setSelectedIndex(0);
+        ComboClaseSelecionada.setSelectedIndex(0);
         actualizarElementosHabilidadExtra();
         lblImageAvatarCombatiente.setIcon(null);
         lblImageAvatarCombatiente.setText("Sin imagen");
@@ -933,9 +1075,9 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnSubirAvatarActionPerformed
 
-    private void ClaseSelecionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClaseSelecionadaActionPerformed
+    private void ComboClaseSelecionadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboClaseSelecionadaActionPerformed
         actualizarElementosHabilidadExtra();
-    }//GEN-LAST:event_ClaseSelecionadaActionPerformed
+    }//GEN-LAST:event_ComboClaseSelecionadaActionPerformed
 
     private void TxtDefensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDefensaActionPerformed
         // TODO add your handling code here:
@@ -948,12 +1090,24 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnActualizar;
+    private javax.swing.JButton BtnAtacarCombatiente1;
+    private javax.swing.JButton BtnAtacarCombatiente2;
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnGuardar;
+    private javax.swing.JButton BtnHabilidadCombatiente1;
+    private javax.swing.JButton BtnHabilidadCombatiente2;
     private javax.swing.JButton BtnLimpiar;
+    private javax.swing.JButton BtnRegistrarBatallaBD;
+    private javax.swing.JButton BtnReiniciarCombate;
     private javax.swing.JButton BtnSubirAvatar;
-    private javax.swing.JComboBox<String> ClaseSelecionada;
+    private javax.swing.JComboBox<String> ComboClaseSelecionada;
+    private javax.swing.JComboBox<String> ComboCombatiente1;
+    private javax.swing.JComboBox<String> ComboCombatiente2;
+    private javax.swing.JProgressBar ProgressBarVidaCombatiente1;
+    private javax.swing.JProgressBar ProgressBarVidaCombatiente2;
+    private javax.swing.JTabbedPane TabbedPaneArena;
     private javax.swing.JTable TableRegistroCombatientes;
+    private javax.swing.JTextArea TextAreaBitacora;
     private javax.swing.JTextField TxtArma;
     private javax.swing.JTextField TxtDefensa;
     private javax.swing.JTextField TxtFuerza;
@@ -965,16 +1119,6 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     private javax.swing.JTextField TxtNombre;
     private javax.swing.JTextField TxtPoder;
     private javax.swing.JTextField TxtVida;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -987,12 +1131,23 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblAtributosClaseCombatiente1;
+    private javax.swing.JLabel lblAtributosClaseCombatiente2;
+    private javax.swing.JLabel lblAtributosPersonajeBaseCombatiente1;
+    private javax.swing.JLabel lblAtributosPersonajeBaseCombatiente2;
     private javax.swing.JLabel lblAvatarCombatiente;
+    private javax.swing.JLabel lblBitacoraCombate;
+    private javax.swing.JLabel lblCombate1;
+    private javax.swing.JLabel lblCombate2;
+    private javax.swing.JLabel lblCombatiente1;
+    private javax.swing.JLabel lblCombatiente2;
     private javax.swing.JLabel lblImageAvatarCombatiente;
+    private javax.swing.JLabel lblImageCombatiente1;
+    private javax.swing.JLabel lblImageCombatiente2;
+    private javax.swing.JLabel lblImageVersus;
     private javax.swing.JLabel lblRegistroArmaCombatiente;
     private javax.swing.JLabel lblRegistroClaseCombatiente;
+    private javax.swing.JLabel lblRegistroCombatientes;
     private javax.swing.JLabel lblRegistroDefensaCombatiente;
     private javax.swing.JLabel lblRegistroFuerzaCombatiente;
     private javax.swing.JLabel lblRegistroHabilidadExtra1;
@@ -1003,5 +1158,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     private javax.swing.JLabel lblRegistroNombreCombatiente;
     private javax.swing.JLabel lblRegistroPoderCombatiente;
     private javax.swing.JLabel lblRegistroVidaCombatiente;
+    private javax.swing.JLabel lblVidaCombatiente1;
+    private javax.swing.JLabel lblVidaCombatiente2;
     // End of variables declaration//GEN-END:variables
 }
