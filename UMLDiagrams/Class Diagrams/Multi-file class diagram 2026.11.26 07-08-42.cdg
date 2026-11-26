@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="Arquero" package="com.upiicsa.modelo" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="rango" type="int" visibility="private"/>
+        <Field name="municion" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="rango"/>
+          <Argument type="String" name="municion"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Arquero" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getRango" returnType="int" visibility="public"/>
+        <Method name="setRango" returnType="void" visibility="public">
+          <Argument type="int" name="rango"/>
+        </Method>
+        <Method name="getMunicion" returnType="String" visibility="public"/>
+        <Method name="setMunicion" returnType="void" visibility="public">
+          <Argument type="String" name="municion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Barbaro" package="com.upiicsa.modelo" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields>
+        <Field name="estamina" type="int" visibility="private"/>
+        <Field name="resistencia" type="int" visibility="private"/>
+        <Field name="armaAdicional" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="estamina"/>
+          <Argument type="int" name="resistencia"/>
+          <Argument type="String" name="armaAdicional"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Barbaro" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getEstamina" returnType="int" visibility="public"/>
+        <Method name="setEstamina" returnType="void" visibility="public">
+          <Argument type="int" name="estamina"/>
+        </Method>
+        <Method name="getResistencia" returnType="int" visibility="public"/>
+        <Method name="setResistencia" returnType="void" visibility="public">
+          <Argument type="int" name="resistencia"/>
+        </Method>
+        <Method name="getArmaAdicional" returnType="String" visibility="public"/>
+        <Method name="setArmaAdicional" returnType="void" visibility="public">
+          <Argument type="String" name="armaAdicional"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Bardo" package="com.upiicsa.modelo" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="inspiracion" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="inspiracion"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Bardo" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getInspiracion" returnType="int" visibility="public"/>
+        <Method name="setInspiracion" returnType="void" visibility="public">
+          <Argument type="int" name="inspiracion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Caballero" package="com.upiicsa.modelo" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="armadura" type="int" visibility="private"/>
+        <Field name="resistencia" type="int" visibility="private"/>
+        <Field name="escudo" type="boolean" visibility="private"/>
+        <Field name="criaturaApoyo" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="armadura"/>
+          <Argument type="int" name="resistencia"/>
+          <Argument type="boolean" name="escudo"/>
+          <Argument type="String" name="criaturaApoyo"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Caballero" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getArmadura" returnType="int" visibility="public"/>
+        <Method name="setArmadura" returnType="void" visibility="public">
+          <Argument type="int" name="armadura"/>
+        </Method>
+        <Method name="getResistencia" returnType="int" visibility="public"/>
+        <Method name="setResistencia" returnType="void" visibility="public">
+          <Argument type="int" name="resistencia"/>
+        </Method>
+        <Method name="isEscudo" returnType="boolean" visibility="public"/>
+        <Method name="setEscudo" returnType="void" visibility="public">
+          <Argument type="boolean" name="escudo"/>
+        </Method>
+        <Method name="getCriaturaApoyo" returnType="String" visibility="public"/>
+        <Method name="setCriaturaApoyo" returnType="void" visibility="public">
+          <Argument type="String" name="criaturaApoyo"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Golem" package="com.upiicsa.modelo" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="resistencia" type="int" visibility="private"/>
+        <Field name="elemento" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="resistencia"/>
+          <Argument type="String" name="elemento"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Golem" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getResistencia" returnType="int" visibility="public"/>
+        <Method name="setResistencia" returnType="void" visibility="public">
+          <Argument type="int" name="resistencia"/>
+        </Method>
+        <Method name="getElemento" returnType="String" visibility="public"/>
+        <Method name="setElemento" returnType="void" visibility="public">
+          <Argument type="String" name="elemento"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Ninfa" package="com.upiicsa.modelo" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="elemento" type="String" visibility="private"/>
+        <Field name="nivelSeduccion" type="int" visibility="private"/>
+        <Field name="experiencia" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="String" name="elemento"/>
+          <Argument type="int" name="nivelSeduccion"/>
+          <Argument type="int" name="experiencia"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Ninfa" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getElemento" returnType="String" visibility="public"/>
+        <Method name="setElemento" returnType="void" visibility="public">
+          <Argument type="String" name="elemento"/>
+        </Method>
+        <Method name="getNivelSeduccion" returnType="int" visibility="public"/>
+        <Method name="setNivelSeduccion" returnType="void" visibility="public">
+          <Argument type="int" name="nivelSeduccion"/>
+        </Method>
+        <Method name="getExperiencia" returnType="int" visibility="public"/>
+        <Method name="setExperiencia" returnType="void" visibility="public">
+          <Argument type="int" name="experiencia"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Orco" package="com.upiicsa.modelo" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="colmillos" type="int" visibility="private"/>
+        <Field name="tamano" type="String" visibility="private"/>
+        <Field name="color" type="String" visibility="private"/>
+        <Field name="aditamento" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="colmillos"/>
+          <Argument type="String" name="tamano"/>
+          <Argument type="String" name="color"/>
+          <Argument type="String" name="aditamento"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Orco" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getColmillos" returnType="int" visibility="public"/>
+        <Method name="setColmillos" returnType="void" visibility="public">
+          <Argument type="int" name="colmillos"/>
+        </Method>
+        <Method name="getTamano" returnType="String" visibility="public"/>
+        <Method name="setTamano" returnType="void" visibility="public">
+          <Argument type="String" name="tamano"/>
+        </Method>
+        <Method name="getColor" returnType="String" visibility="public"/>
+        <Method name="setColor" returnType="void" visibility="public">
+          <Argument type="String" name="color"/>
+        </Method>
+        <Method name="getAditamento" returnType="String" visibility="public"/>
+        <Method name="setAditamento" returnType="void" visibility="public">
+          <Argument type="String" name="aditamento"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PersonajeBase" package="com.upiicsa.modelo" visibility="public" isAbstract="true" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="vida" type="int" visibility="private"/>
+        <Field name="vidaMaxima" type="int" visibility="private"/>
+        <Field name="fuerza" type="int" visibility="private"/>
+        <Field name="poder" type="int" visibility="private"/>
+        <Field name="defensa" type="int" visibility="private"/>
+        <Field name="arma" type="String" visibility="private"/>
+        <Field name="rutaImagen" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="PersonajeBase" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="recibirDano" returnType="String" visibility="public">
+          <Argument type="int" name="danoBruto"/>
+        </Method>
+        <Method name="getEstadisticasBase" returnType="String" visibility="public"/>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public" isAbstract="true">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public" isAbstract="true"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public" isAbstract="true"/>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getVida" returnType="int" visibility="public"/>
+        <Method name="setVida" returnType="void" visibility="public">
+          <Argument type="int" name="vida"/>
+        </Method>
+        <Method name="getVidaMaxima" returnType="int" visibility="public"/>
+        <Method name="setVidaMaxima" returnType="void" visibility="public">
+          <Argument type="int" name="vidaMaxima"/>
+        </Method>
+        <Method name="getFuerza" returnType="int" visibility="public"/>
+        <Method name="setFuerza" returnType="void" visibility="public">
+          <Argument type="int" name="fuerza"/>
+        </Method>
+        <Method name="getPoder" returnType="int" visibility="public"/>
+        <Method name="setPoder" returnType="void" visibility="public">
+          <Argument type="int" name="poder"/>
+        </Method>
+        <Method name="getDefensa" returnType="int" visibility="public"/>
+        <Method name="setDefensa" returnType="void" visibility="public">
+          <Argument type="int" name="defensa"/>
+        </Method>
+        <Method name="getArma" returnType="String" visibility="public"/>
+        <Method name="setArma" returnType="void" visibility="public">
+          <Argument type="String" name="arma"/>
+        </Method>
+        <Method name="getRutaImagen" returnType="String" visibility="public"/>
+        <Method name="setRutaImagen" returnType="void" visibility="public">
+          <Argument type="String" name="rutaImagen"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Polinene" package="com.upiicsa.modelo" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="cantidadPolimonedas" type="int" visibility="private"/>
+        <Field name="inteligencia" type="int" visibility="private"/>
+        <Field name="tamear" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="cantidadPolimonedas"/>
+          <Argument type="int" name="inteligencia"/>
+          <Argument type="boolean" name="tamear"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Polinene" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getCantidadPolimonedas" returnType="int" visibility="public"/>
+        <Method name="setCantidadPolimonedas" returnType="void" visibility="public">
+          <Argument type="int" name="cantidadPolimonedas"/>
+        </Method>
+        <Method name="getInteligencia" returnType="int" visibility="public"/>
+        <Method name="setInteligencia" returnType="void" visibility="public">
+          <Argument type="int" name="inteligencia"/>
+        </Method>
+        <Method name="isTamear" returnType="boolean" visibility="public"/>
+        <Method name="setTamear" returnType="void" visibility="public">
+          <Argument type="boolean" name="tamear"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Saiyan" package="com.upiicsa.modelo" visibility="public" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="cola" type="boolean" visibility="private"/>
+        <Field name="celulasZ" type="int" visibility="private"/>
+        <Field name="zenkai" type="int" visibility="private"/>
+        <Field name="ki" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="boolean" name="cola"/>
+          <Argument type="int" name="celulasZ"/>
+          <Argument type="int" name="zenkai"/>
+          <Argument type="int" name="ki"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Saiyan" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="isCola" returnType="boolean" visibility="public"/>
+        <Method name="setCola" returnType="void" visibility="public">
+          <Argument type="boolean" name="cola"/>
+        </Method>
+        <Method name="getCelulasZ" returnType="int" visibility="public"/>
+        <Method name="setCelulasZ" returnType="void" visibility="public">
+          <Argument type="int" name="celulasZ"/>
+        </Method>
+        <Method name="getZenkai" returnType="int" visibility="public"/>
+        <Method name="setZenkai" returnType="void" visibility="public">
+          <Argument type="int" name="zenkai"/>
+        </Method>
+        <Method name="getKi" returnType="int" visibility="public"/>
+        <Method name="setKi" returnType="void" visibility="public">
+          <Argument type="int" name="ki"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Stand" package="com.upiicsa.modelo" visibility="public" xPosition="992.0" yPosition="877.0">
+      <Fields>
+        <Field name="rango" type="int" visibility="private"/>
+        <Field name="tipo" type="String" visibility="private"/>
+        <Field name="frase" type="String" visibility="private"/>
+        <Field name="usuario" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="int" name="vida"/>
+          <Argument type="int" name="fuerza"/>
+          <Argument type="int" name="poder"/>
+          <Argument type="int" name="defensa"/>
+          <Argument type="String" name="arma"/>
+          <Argument type="String" name="rutaImagen"/>
+          <Argument type="int" name="rango"/>
+          <Argument type="String" name="tipo"/>
+          <Argument type="String" name="frase"/>
+          <Argument type="String" name="usuario"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Stand" name="original"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ejecutarHabilidadEspecial" returnType="String" visibility="public">
+          <Argument type="PersonajeBase" name="objetivo"/>
+        </Method>
+        <Method name="getTipoClase" returnType="String" visibility="public"/>
+        <Method name="getEstadisticasClase" returnType="String" visibility="public"/>
+        <Method name="getRango" returnType="int" visibility="public"/>
+        <Method name="setRango" returnType="void" visibility="public">
+          <Argument type="int" name="rango"/>
+        </Method>
+        <Method name="getTipo" returnType="String" visibility="public"/>
+        <Method name="setTipo" returnType="void" visibility="public">
+          <Argument type="String" name="tipo"/>
+        </Method>
+        <Method name="getFrase" returnType="String" visibility="public"/>
+        <Method name="setFrase" returnType="void" visibility="public">
+          <Argument type="String" name="frase"/>
+        </Method>
+        <Method name="getUsuario" returnType="String" visibility="public"/>
+        <Method name="setUsuario" returnType="void" visibility="public">
+          <Argument type="String" name="usuario"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="com.upiicsa.modelo.Golem" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.upiicsa.modelo.Arquero" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.upiicsa.modelo.Bardo" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Bardo" target="com.upiicsa.modelo.PersonajeBase"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Arquero" target="com.upiicsa.modelo.PersonajeBase"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Polinene" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.Barbaro" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Caballero" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.Polinene" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Golem" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.Ninfa" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.upiicsa.modelo.Orco" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Orco" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.Saiyan" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Stand" target="com.upiicsa.modelo.PersonajeBase"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Ninfa" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.Caballero" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Saiyan" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.PersonajeBase" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="com.upiicsa.modelo.Barbaro" target="com.upiicsa.modelo.PersonajeBase"/>
+    <UseRelation source="com.upiicsa.modelo.Stand" target="com.upiicsa.modelo.PersonajeBase" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
