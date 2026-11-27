@@ -7,6 +7,7 @@ import com.upiicsa.vista.ArenaBatallaVista;
 public class Main {
 
     public static void main(String[] args) {
+        
         java.awt.EventQueue.invokeLater(() -> {
 
             GestorArenaModelo modelo = new GestorArenaModelo();

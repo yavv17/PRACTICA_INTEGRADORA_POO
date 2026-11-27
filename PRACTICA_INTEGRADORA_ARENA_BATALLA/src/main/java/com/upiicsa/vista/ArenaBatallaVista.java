@@ -16,7 +16,7 @@ import javax.swing.event.ChangeListener;
 
 public final class ArenaBatallaVista extends javax.swing.JFrame {
     
-    public static final String RUTA_IMAGEN_VERSUS =  "resources/imagenes/Image_Versus.png";
+    public static final String RUTA_IMAGEN_VERSUS =  "src/main/resources/imagenes/Image_Versus.png";
     private DefaultTableModel modeloTabla; 
     private List<JLabel> labelsExtra = new ArrayList<>();
     private List<JTextField> camposExtra = new ArrayList<>();
@@ -67,7 +67,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 p.getVida(),
                 p.getFuerza(),
                 p.getDefensa(),
-                p.ejecutarHabilidadEspecial(p)
+                p.getHabilidadEspecial()
             };
             
             modeloTabla.addRow(fila);
@@ -84,6 +84,12 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         BtnActualizar.addActionListener(actionListener);
         BtnEliminar.addActionListener(actionListener);
         BtnSubirAvatar.addActionListener(actionListener);
+        BtnAtacarCombatiente1.addActionListener(actionListener);
+        BtnAtacarCombatiente2.addActionListener(actionListener);
+        BtnHabilidadCombatiente1.addActionListener(actionListener);
+        BtnHabilidadCombatiente2.addActionListener(actionListener);
+        BtnReiniciarCombate.addActionListener(actionListener);
+        BtnRegistrarBatallaBD.addActionListener(actionListener);
         TabbedPaneArena.addChangeListener(changeListener);
         ComboCombatiente1.addActionListener(actionListener);
         ComboCombatiente2.addActionListener(actionListener);
@@ -96,6 +102,10 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         actualizarElementosClase();
         modeloTabla = (DefaultTableModel) TableRegistroCombatientes.getModel();
         mostrarAvatarEnLabel(lblImageVersus,RUTA_IMAGEN_VERSUS);
+        restringirSoloNumeros(TxtVida);
+        restringirSoloNumeros(TxtFuerza);
+        restringirSoloNumeros(TxtPoder);
+        restringirSoloNumeros(TxtDefensa);
     }
     
     public void llenarComboCombatiente(
@@ -176,12 +186,16 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         configurarBarraVida(ProgressBarVidaCombatiente1, combatiente1.getVidaMaxima());
         lblAtributosPersonajeBaseCombatiente1.setText(combatiente1.getEstadisticasBase());
         lblAtributosClaseCombatiente1.setText(combatiente1.getEstadisticasClase());
+        BtnHabilidadCombatiente1.setText(combatiente1.getHabilidadEspecial());
         
         mostrarAvatarEnLabel(lblImageCombatiente2, combatiente2.getRutaImagen());
         lblVidaCombatiente2.setText("HP: " + combatiente2.getVida() + "/" + combatiente2.getVidaMaxima());
         configurarBarraVida(ProgressBarVidaCombatiente2, combatiente2.getVidaMaxima());
         lblAtributosPersonajeBaseCombatiente2.setText(combatiente2.getEstadisticasBase());
         lblAtributosClaseCombatiente2.setText(combatiente2.getEstadisticasClase());
+        BtnHabilidadCombatiente2.setText(combatiente2.getHabilidadEspecial());
+        
+        limpiarBitacora();
     }
     
     public void configurarBarraVida(JProgressBar barraVida,int vidaMax){
@@ -255,9 +269,81 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         CheckBoxHabilidadBooleana.setSelected(false);
         actualizarElementosClase();
     }
+    
+    public void actualizarEstadisticasCombate(
+        PersonajeBase combatiente1, PersonajeBase combatiente2) {
+
+        lblAtributosPersonajeBaseCombatiente1.setText(
+                combatiente1.getEstadisticasBase());
+
+        lblAtributosClaseCombatiente1.setText(
+                combatiente1.getEstadisticasClase());
+
+        lblAtributosPersonajeBaseCombatiente2.setText(
+                combatiente2.getEstadisticasBase());
+
+        lblAtributosClaseCombatiente2.setText(
+                combatiente2.getEstadisticasClase());
+
+        actualizarVidaCombatiente(
+                lblVidaCombatiente1,
+                ProgressBarVidaCombatiente1,
+                combatiente1.getVida(),
+                combatiente1.getVidaMaxima());
+
+        actualizarVidaCombatiente(
+                lblVidaCombatiente2,
+                ProgressBarVidaCombatiente2,
+                combatiente2.getVida(),
+                combatiente2.getVidaMaxima());
+        
+    }
+    
+    public void actualizarVidaCombatiente(
+            JLabel lblVida,
+            JProgressBar barraVida,
+            int vida,
+            int vidaMax) {
+
+
+        lblVida.setText("HP: " + vida + " / " + vidaMax);
+
+        barraVida.setMinimum(0);
+        barraVida.setMaximum(vidaMax);
+        barraVida.setValue(vida);
+        
+        double porcentaje = (double) vida / vidaMax * 100;
+
+        if (vida == 0) {
+            barraVida.setValue(0);
+            barraVida.setForeground(Color.GRAY);
+        } else if (porcentaje > 80) {
+            barraVida.setForeground(Color.GREEN);
+        } else if (porcentaje > 35) {
+            barraVida.setForeground(Color.YELLOW);
+        } else {
+            barraVida.setForeground(Color.RED);
+        }
+    }
+    
+    public void bloquearBtnsCombatientes() {
+        getBtnAtacarCombatiente1().setEnabled(false);
+        getBtnHabilidadCombatiente1().setEnabled(false);
+
+        getBtnAtacarCombatiente2().setEnabled(false);
+        getBtnHabilidadCombatiente2().setEnabled(false);
+    }
 
         public JButton getBtnSubirAvatar() {
         return BtnSubirAvatar;
+    }
+        
+    public void actualizarBitacora(String mensaje) {
+        TextAreaBitacora.append(mensaje + "\n");
+    }
+    
+    public void limpiarBitacora() {
+        TextAreaBitacora.setText("");
     }
 
     public JButton getBtnGuardar() {
@@ -356,6 +442,48 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         return TabbedPaneArena;
     }
 
+    public JProgressBar getProgressBarVidaCombatiente1() {
+        return ProgressBarVidaCombatiente1;
+    }
+
+    public JProgressBar getProgressBarVidaCombatiente2() {
+        return ProgressBarVidaCombatiente2;
+    }
+
+    public JLabel getLblAtributosClaseCombatiente1() {
+        return lblAtributosClaseCombatiente1;
+    }
+
+    public JLabel getLblAtributosClaseCombatiente2() {
+        return lblAtributosClaseCombatiente2;
+    }
+
+    public JLabel getLblAtributosPersonajeBaseCombatiente1() {
+        return lblAtributosPersonajeBaseCombatiente1;
+    }
+
+    public JLabel getLblAtributosPersonajeBaseCombatiente2() {
+        return lblAtributosPersonajeBaseCombatiente2;
+    }
+
+    public JLabel getLblAvatarCombatiente() {
+        return lblAvatarCombatiente;
+    }
+
+    public JLabel getLblBitacoraCombate() {
+        return lblBitacoraCombate;
+    }
+
+    public JLabel getLblCombatienteTurno1() {
+        return lblCombatienteTurno1;
+    }
+
+    public JLabel getLblCombatienteTurno2() {
+        return lblCombatienteTurno2;
+    }
+
+    
+    
     public JComboBox<PersonajeBase> getComboCombatiente1() {
         return ComboCombatiente1;
     }
@@ -436,8 +564,8 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         lblVidaCombatiente2 = new javax.swing.JLabel();
         lblAtributosPersonajeBaseCombatiente2 = new javax.swing.JLabel();
         lblAtributosClaseCombatiente2 = new javax.swing.JLabel();
-        lblCombate1 = new javax.swing.JLabel();
-        lblCombate2 = new javax.swing.JLabel();
+        lblCombatienteTurno1 = new javax.swing.JLabel();
+        lblCombatienteTurno2 = new javax.swing.JLabel();
         lblBitacoraCombate = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         BtnReiniciarCombate = new javax.swing.JButton();
@@ -859,7 +987,12 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
 
         BtnAtacarCombatiente1.setBackground(new java.awt.Color(201, 6, 2));
         BtnAtacarCombatiente1.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAtacarCombatiente1.setText("Atacar");
+        BtnAtacarCombatiente1.setText("Atacar (Fisico)");
+        BtnAtacarCombatiente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAtacarCombatiente1ActionPerformed(evt);
+            }
+        });
 
         BtnHabilidadCombatiente1.setBackground(new java.awt.Color(18, 77, 181));
         BtnHabilidadCombatiente1.setForeground(new java.awt.Color(255, 255, 255));
@@ -926,7 +1059,7 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
 
         BtnAtacarCombatiente2.setBackground(new java.awt.Color(201, 6, 2));
         BtnAtacarCombatiente2.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAtacarCombatiente2.setText("Atacar");
+        BtnAtacarCombatiente2.setText("Atacar (Fisico)");
         BtnAtacarCombatiente2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(201, 6, 2), 1, true));
 
         BtnHabilidadCombatiente2.setBackground(new java.awt.Color(18, 77, 181));
@@ -990,11 +1123,11 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblCombate1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCombate1.setText("Combate");
+        lblCombatienteTurno1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCombatienteTurno1.setText("Combate");
 
-        lblCombate2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblCombate2.setText("Combate");
+        lblCombatienteTurno2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblCombatienteTurno2.setText("Combate");
 
         lblBitacoraCombate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblBitacoraCombate.setText("Bitacora del Combate (Registro en Tiempo Real)");
@@ -1074,9 +1207,12 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                                     .addComponent(lblCombatiente2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCombate1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(lblCombatienteTurno1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGap(13, 13, 13)
@@ -1084,8 +1220,9 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(lblCombate2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(530, 530, 530)))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblCombatienteTurno2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(391, 391, 391)))))
                         .addGap(27, 27, 27))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -1101,8 +1238,8 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCombate1)
-                    .addComponent(lblCombate2))
+                    .addComponent(lblCombatienteTurno1)
+                    .addComponent(lblCombatienteTurno2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblImageVersus, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
@@ -1216,6 +1353,10 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtFuerzaActionPerformed
 
+    private void BtnAtacarCombatiente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAtacarCombatiente1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAtacarCombatiente1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnActualizar;
@@ -1267,10 +1408,10 @@ public final class ArenaBatallaVista extends javax.swing.JFrame {
     private javax.swing.JLabel lblAtributosPersonajeBaseCombatiente2;
     private javax.swing.JLabel lblAvatarCombatiente;
     private javax.swing.JLabel lblBitacoraCombate;
-    private javax.swing.JLabel lblCombate1;
-    private javax.swing.JLabel lblCombate2;
     private javax.swing.JLabel lblCombatiente1;
     private javax.swing.JLabel lblCombatiente2;
+    private javax.swing.JLabel lblCombatienteTurno1;
+    private javax.swing.JLabel lblCombatienteTurno2;
     private javax.swing.JLabel lblImageAvatarCombatiente;
     private javax.swing.JLabel lblImageCombatiente1;
     private javax.swing.JLabel lblImageCombatiente2;

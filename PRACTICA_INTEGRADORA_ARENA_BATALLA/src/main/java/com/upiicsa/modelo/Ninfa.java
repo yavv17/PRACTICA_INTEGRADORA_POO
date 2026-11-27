@@ -1,30 +1,13 @@
 package com.upiicsa.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
+import java.util.Map;
 
-
-@Entity
-@Table(name = "Ninfas")
 public class Ninfa extends PersonajeBase {
     
-    @Column(
-        name = "elemento",
-        nullable = false
-    )
     private String elemento;
-    
-    @Column(
-        name = "nivel_seduccion",
-        nullable = false
-    )
     private int nivelSeduccion;
-    
-    @Column(
-        name = "experiencia",
-        nullable = false
-    )
     private int experiencia;
 
     public Ninfa(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,String elemento, int nivelSeduccion, int experiencia) {
@@ -40,10 +23,53 @@ public class Ninfa extends PersonajeBase {
         this.nivelSeduccion = original.getNivelSeduccion();
         this.experiencia = original.getExperiencia();
     }
-   
+
+    public Ninfa(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+        super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
+    }
+    
+    
+    
+    @Override
+    public String ejecutarAtaque(PersonajeBase objetivo) {
+        int dano = getPoder() + getExperiencia() / 2;
+
+        return getNombre() + " lanza un ataque de "
+                + getElemento() + ". "
+                + objetivo.recibirDano(dano);
+    }
+    
+    @Override
+    public String getHabilidadEspecial() {
+        return "Seduccion y ulti";
+    }
+
+
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        return "H Ninfa";
+        return seduccionYUlti(objetivo);
+    }
+
+    public String seduccionYUlti(PersonajeBase objetivo) {
+        int defensaOriginal = objetivo.getDefensa();
+
+        try {
+            int reduccion = (int) (defensaOriginal * 0.40);
+
+            objetivo.setDefensa(defensaOriginal - reduccion);
+
+            int dano = getPoder() * 2
+                    + getNivelSeduccion() * 2
+                    + getExperiencia();
+
+            return getNombre() + " ejecuta " + getHabilidadEspecial() + ". "
+                    + "Utiliza su elemento " + getElemento() + ". "
+                    + "Reduce temporalmente " + reduccion
+                    + " puntos de defensa del rival. "
+                    + objetivo.recibirDano(dano);
+        } finally {
+            objetivo.setDefensa(defensaOriginal);
+        }
     }
 
     @Override
@@ -57,6 +83,23 @@ public class Ninfa extends PersonajeBase {
                 + getNivelSeduccion()+ " | Experiencia: " + getExperiencia();
     }
 
+    @Override
+    public String getAtributosClaseSerializados() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+
+            Map<String, Object> atributos = new HashMap<>();
+            atributos.put("elemento", getElemento());
+            atributos.put("nivelSeduccion", getNivelSeduccion());
+            atributos.put("experiencia", getExperiencia());
+
+            return mapper.writeValueAsString(atributos);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al serializar atributos de la ninfa", e);
+        }
+    }
+    
     public String getElemento() {
         return elemento;
     }

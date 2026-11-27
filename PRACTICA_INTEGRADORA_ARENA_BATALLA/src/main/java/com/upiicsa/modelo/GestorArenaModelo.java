@@ -1,59 +1,95 @@
 package com.upiicsa.modelo;
+import com.upiicsa.persistencia.PersonajeDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 
 public class GestorArenaModelo { 
-    private final List<PersonajeBase> personajes = new ArrayList<>(); 
+    private List<PersonajeBase> roster = new ArrayList<>();
     private PersonajeBase combatiente1;
     private PersonajeBase combatiente2;
+    private final PersonajeDAO personajeDAO = new PersonajeDAO();
  
-    public void agregar(JFrame panel,PersonajeBase nuevo) throws IllegalArgumentException { 
-        boolean idSinUsar = true;
+    public void agregar(PersonajeBase nuevo) throws IllegalArgumentException, SQLException { 
         // TODO: Validar que no exista otro personaje con el mismo ID antes de agregar. 
         // En Unidad V: Invocar aquí a personajeDAO.insertar(nuevo) y sincronizar 'roster'.
-        for(int i = 0; i < personajes.size(); i++){
-            if(personajes.get(i).getId().equalsIgnoreCase(nuevo.getId())){
-                idSinUsar = false;
-            }
+        if(buscarPorId(nuevo.getId()) != null){
+            throw new IllegalArgumentException(
+                    "Ya existe un combatiente con ID" + nuevo.getId()
+            );
         }
         
-        if(idSinUsar){
-            personajes.add(nuevo); 
-        }else{
-            throw new IllegalArgumentException("Ya existe un combatiente con ID " + nuevo.getId()); 
-        }
-    } 
+        personajeDAO.insertar(nuevo);
+        
+        roster.add(nuevo);
+        
+    }
  
     public List<PersonajeBase> obtenerTodos() { 
-        return new ArrayList<>(personajes); 
+        return new ArrayList<>(roster);
     }
     
     public PersonajeBase buscarPorId(String id) {
-        for (int i = 0; i < personajes.size(); i++) {
-            PersonajeBase personaje = personajes.get(i);
-
-            if (personaje.getId().equalsIgnoreCase(id)) {
+        for (PersonajeBase personaje : roster) {
+            if (personaje.getId().equals(id)) {
                 return personaje;
             }
         }
+
         return null;
     }
  
-    public boolean actualizar(PersonajeBase actualizado) { 
-        for (int i = 0; i < personajes.size(); i++) { 
-            if (personajes.get(i).getId().equalsIgnoreCase(actualizado.getId())) { 
-                personajes.set(i, actualizado); 
-                return true; 
-            } 
-        } 
-        return false; 
-    } 
- 
-    public boolean eliminar(String id) { 
-        // TODO: Implementar eliminación usando removeIf() sobre 'roster' comparando el ID.
-        return personajes.removeIf(combatiente -> combatiente.getId().equalsIgnoreCase(id));
-    } 
+    public boolean actualizar(PersonajeBase actualizado) throws SQLException {
+            int indice = -1;
+
+            for (int i = 0; i < roster.size(); i++) {
+                if (roster.get(i).getId().equals(actualizado.getId())) {
+                    indice = i;
+                    break;
+                }
+            }
+
+            if (indice == -1) {
+                return false;
+            }
+            
+            boolean resultado = personajeDAO.actualizar(actualizado);
+
+            if (resultado) {
+                roster.set(indice, actualizado);
+            }
+
+            return resultado;
+        }
+    public boolean eliminar(String id) throws SQLException {
+        int indice = -1;
+
+        for (int i = 0; i < roster.size(); i++) {
+            if (roster.get(i).getId().equals(id)) {
+                indice = i;
+                break;
+            }
+        }
+
+        if (indice == -1) {
+            return false;
+        }
+
+        boolean resultado = personajeDAO.eliminar(id);
+
+        if (resultado) {
+            roster.remove(indice);
+        }
+
+        return resultado;
+    }
+    
+    public void cargarRoster() throws SQLException {
+        List<PersonajeBase> personajes = personajeDAO.listarTodos();
+
+        roster.clear();
+        roster.addAll(personajes);
+    }
     
     public PersonajeBase crearCopia(PersonajeBase original){
         if(original instanceof Arquero){

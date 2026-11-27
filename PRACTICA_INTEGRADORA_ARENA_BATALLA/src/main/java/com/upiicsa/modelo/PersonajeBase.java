@@ -1,67 +1,15 @@
 package com.upiicsa.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-
-@MappedSuperclass
 public abstract class PersonajeBase { 
-        
-    @Id
-    @Column(
-        name = "id_per",
-        unique = true,
-        nullable = false,
-        length = 7
-    )
+
     private String id; 
-    
-    @Column(
-        name = "nombre",
-        nullable = false
-    )
     private String nombre;
-    
-    @Column(
-        name = "vida",
-        nullable = false    
-    )
     private int vida; 
-    
-    @Column(
-        name = "vida_maxima",
-        nullable = false
-    )
-    private int vidaMaxima; 
-    
-    @Column(
-        name = "fuerza",
-        nullable = false
-    )
+    private int vidaMaxima;
     private int fuerza; 
-    
-    @Column(
-        name = "poder",
-        nullable = false
-    )
-    private int poder; 
-    
-    @Column(
-        name = "defensa",
-        nullable = false
-    )
+    private int poder;
     private int defensa; 
-    
-    @Column(
-        name = "arma",
-        nullable = false
-    )
     private String arma;
-    
-    @Column(
-        name = "ruta_imagen",
-        nullable = true
-    )
     private String rutaImagen; // Columna VARCHAR en la tabla Personajes (Unidad V) 
  
     public PersonajeBase(String id, String nombre, int vida, int fuerza,  
@@ -88,7 +36,7 @@ public abstract class PersonajeBase {
         this.arma = original.getArma(); 
         this.rutaImagen = original.getRutaImagen(); 
     }
- 
+
     public String recibirDano(int danoBruto) { 
         // TODO: Calcular el daño neto descontando parte de 'this.defensa' 
         // asegurando daño mínimo de 1 y que 'this.vida' nunca sea menor a 0. 
@@ -103,9 +51,12 @@ public abstract class PersonajeBase {
                 " | Defensa: " + getDefensa() + " | Arma : " + getArma();
     }
  
+    public abstract String ejecutarAtaque(PersonajeBase objetivo);
     public abstract String ejecutarHabilidadEspecial(PersonajeBase objetivo); 
     public abstract String getTipoClase();
+    public abstract String getHabilidadEspecial();
     public abstract String getEstadisticasClase();
+    public abstract String getAtributosClaseSerializados();
     // TODO: Completar getters y setters encapsulados necesarios para la JTable, DAO y Controlador 
 
     public String getId() {
@@ -179,6 +130,8 @@ public abstract class PersonajeBase {
     public void setRutaImagen(String rutaImagen) {
         this.rutaImagen = rutaImagen;
     }
+    
+    
 
     @Override
     public String toString() {

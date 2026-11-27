@@ -1,17 +1,11 @@
 package com.upiicsa.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
+import java.util.Map;
 
-@Entity
-@Table(name = "Bardos")
 public class Bardo extends PersonajeBase {
     
-    @Column(
-        name = "inspiracion",
-        nullable = false
-    )
     private int inspiracion;
 
     public Bardo(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int inspiracion) {
@@ -24,9 +18,53 @@ public class Bardo extends PersonajeBase {
         this.inspiracion = original.getInspiracion();
     }
 
+    public Bardo(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+        super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
+    }
+    
+    
+    
+    @Override
+    public String ejecutarAtaque(PersonajeBase objetivo) {
+        int dano = getPoder() + getFuerza() / 2
+                + getInspiracion();
+
+        return getNombre() + " ejecuta una melodía ofensiva. "
+                + objetivo.recibirDano(dano);
+    }
+    
+    @Override
+    public String getHabilidadEspecial() {
+        return "Buff e inspirar";
+    }
+
+
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        return "H Bardo";
+        return buffEInspirar(objetivo);
+    }
+
+    public String buffEInspirar(PersonajeBase objetivo) {
+        int vidaAnterior = getVida();
+
+        int curacion = (int) (getVidaMaxima() * 0.15)
+                + getInspiracion() * 2;
+
+        setVida(Math.min(getVidaMaxima(), getVida() + curacion));
+
+        int bonoInspiracion = getInspiracion();
+
+        int dano = getPoder() + getFuerza()
+                + bonoInspiracion * 2;
+
+        String resultado = getNombre()
+                + " ejecuta " + getHabilidadEspecial() + ". "
+                + "Su melodía recupera "
+                + (getVida() - vidaAnterior) + " puntos de vida. "
+                + "La inspiración potencia su melodía ofensiva. "
+                + objetivo.recibirDano(dano);
+
+        return resultado;
     }
 
     @Override
@@ -37,6 +75,21 @@ public class Bardo extends PersonajeBase {
     @Override
     public String getEstadisticasClase() {
         return "Inspiracion: " + getInspiracion();
+    }
+    
+    @Override
+    public String getAtributosClaseSerializados() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+
+            Map<String, Object> atributos = new HashMap<>();
+            atributos.put("inspiracion", getInspiracion());
+
+            return mapper.writeValueAsString(atributos);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al serializar atributos del bardo", e);
+        }
     }
 
     public int getInspiracion() {

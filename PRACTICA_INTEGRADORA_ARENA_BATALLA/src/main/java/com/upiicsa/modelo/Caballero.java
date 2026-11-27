@@ -1,35 +1,14 @@
 package com.upiicsa.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
+import java.util.Map;
 
-@Entity
-@Table(name = "Caballeros")
 public class Caballero extends PersonajeBase {
     
-    @Column(
-        name = "armadura",
-        nullable = false
-    )
     private int armadura;
-    
-    @Column(
-        name = "resistencia",
-        nullable = false
-    )
     private int resistencia;
-    
-    @Column(
-        name = "escudo",
-        nullable = false
-    )
     private boolean escudo;
-    
-    @Column(
-        name = "criatura_apoyo",
-        nullable = false
-    )
     private String criaturaApoyo;
 
     public Caballero(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int armadura, int resistencia, boolean escudo, String criaturaApoyo) {
@@ -48,9 +27,48 @@ public class Caballero extends PersonajeBase {
         this.criaturaApoyo = original.getCriaturaApoyo();
     }
 
+    public Caballero(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+        super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
+    }
+    
+
+    @Override
+    public String ejecutarAtaque(PersonajeBase objetivo) {
+        int dano = getFuerza() + getArmadura()
+                + getPoder() / 3;
+
+        return getNombre() + " ataca con " + getArma() + ". "
+                + objetivo.recibirDano(dano);
+    }
+    
+    @Override
+    public String getHabilidadEspecial() {
+        return "Bloquear y montar criatura";
+    }
+
+
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        return "H Caballero";
+        return bloquearYMontarCriatura(objetivo);
+    }
+
+    public String bloquearYMontarCriatura(PersonajeBase objetivo) {
+        if (!isEscudo()) {
+            return getNombre() + " no puede ejecutar la habilidad porque no tiene su escudo.";
+        }
+
+        int aumentoDefensa = getArmadura() + getResistencia() / 2;
+
+        setDefensa(getDefensa() + aumentoDefensa);
+
+        int dano = getFuerza() + getArmadura()
+                + getResistencia() + getPoder();
+
+        return getNombre() + " activa su escudo y monta a "
+                + getCriaturaApoyo() + ". "
+                + "Su defensa aumenta en " + aumentoDefensa + " puntos. "
+                + objetivo.recibirDano(dano)
+                + " Defensa actual: " + getDefensa();
     }
 
     @Override
@@ -68,6 +86,24 @@ public class Caballero extends PersonajeBase {
         }
         return "Armadura: " + getArmadura()+ " | Resistencia: " + getResistencia() + " | Escudo: " 
                 + hayEscudo + " | Criatura de apoyo: " + getCriaturaApoyo();
+    }
+    
+    @Override
+    public String getAtributosClaseSerializados() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+
+            Map<String, Object> atributos = new HashMap<>();
+            atributos.put("armadura", getArmadura());
+            atributos.put("resistencia", getResistencia());
+            atributos.put("escudo", isEscudo());
+            atributos.put("criaturaApoyo", getCriaturaApoyo());
+
+            return mapper.writeValueAsString(atributos);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al serializar atributos del caballero", e);
+        }
     }
 
     public int getArmadura() {

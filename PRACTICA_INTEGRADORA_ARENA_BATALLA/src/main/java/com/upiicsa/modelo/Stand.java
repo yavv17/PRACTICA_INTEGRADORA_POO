@@ -1,23 +1,14 @@
 package com.upiicsa.modelo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
+import java.util.Map;
 
-@Entity
-@Table(name = "Stand")
 public class Stand extends PersonajeBase {
-    
-    @Column
+
     private int rango;
-    
-    @Column
     private String tipo;
-    
-    @Column
     private String frase;
-    
-    @Column
     private String usuario;
 
     public Stand(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen,int rango, String tipo, String frase, String usuario) {
@@ -36,9 +27,45 @@ public class Stand extends PersonajeBase {
         this.usuario = original.getUsuario();
     }
 
+    public Stand(String id, String nombre, int vida, int fuerza, int poder, int defensa, String arma, String rutaImagen) {
+        super(id, nombre, vida, fuerza, poder, defensa, arma, rutaImagen);
+    }
+    
+
+    @Override
+    public String ejecutarAtaque(PersonajeBase objetivo) {
+        int dano = getFuerza() + getPoder()
+                + getRango();
+
+        return getNombre() + " y su Stand de tipo "
+                + getTipo() + " atacan. "
+                + objetivo.recibirDano(dano);
+    }
+
     @Override
     public String ejecutarHabilidadEspecial(PersonajeBase objetivo) {
-        return "H Stand";
+        return manifestarRafaga(objetivo);
+    }
+    
+    @Override
+    public String getHabilidadEspecial() {
+        return "Manifestar rafaga";
+    }
+
+
+    public String manifestarRafaga(PersonajeBase objetivo) {
+        int danoIndividual = getFuerza() + getPoder()
+                + getRango();
+
+        int numeroGolpes = 3;
+        int danoTotal = danoIndividual * numeroGolpes;
+
+        return getNombre() + " manifiesta su Stand junto a "
+                + getUsuario() + ". "
+                + "¡" + getFrase() + "! "
+                + "Su Stand de tipo " + getTipo()
+                + " ejecuta una ráfaga de " + numeroGolpes + " golpes. "
+                + objetivo.recibirDano(danoTotal);
     }
 
     @Override
@@ -50,6 +77,24 @@ public class Stand extends PersonajeBase {
     public String getEstadisticasClase() {
         return "Rango: " + getRango()+ " | Tipo: " + getTipo()+ 
                 " | Frase: " + getFrase() + " | Usuario: " + getUsuario() ;
+    }
+    
+    @Override
+    public String getAtributosClaseSerializados() {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+
+            Map<String, Object> atributos = new HashMap<>();
+            atributos.put("rango", getRango());
+            atributos.put("tipo", getTipo());
+            atributos.put("frase", getFrase());
+            atributos.put("usuario", getUsuario());
+
+            return mapper.writeValueAsString(atributos);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al serializar atributos del stand", e);
+        }
     }
 
     public int getRango() {
