@@ -5,12 +5,58 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 import com.upiicsa.modelo.HistorialBatalla;
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public class BatallaHibernateDAO {
-
     private static final EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("ArenaPOOPersistenceUnit");
+            Persistence.createEntityManagerFactory(
+                "ArenaPOOPersistenceUnit",
+                obtenerConfiguracion()
+            );
 
+    private static Map<String, String> obtenerConfiguracion() {
+
+        Properties propiedades = new Properties();
+
+        try {
+            FileInputStream archivo =
+                    new FileInputStream("db.properties");
+
+            propiedades.load(archivo);
+            archivo.close();
+
+            Map<String, String> configuracion = new HashMap<>();
+
+            configuracion.put(
+                    "jakarta.persistence.jdbc.driver",
+                    propiedades.getProperty("db.driver")
+            );
+
+            configuracion.put(
+                    "jakarta.persistence.jdbc.url",
+                    propiedades.getProperty("db.url")
+            );
+
+            configuracion.put(
+                    "jakarta.persistence.jdbc.user",
+                    propiedades.getProperty("db.user")
+            );
+
+            configuracion.put(
+                    "jakarta.persistence.jdbc.password",
+                    propiedades.getProperty("db.password")
+            );
+
+            return configuracion;
+
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
     public void registrarBatalla(HistorialBatalla batalla) {
         EntityManager em = emf.createEntityManager();
         try {
